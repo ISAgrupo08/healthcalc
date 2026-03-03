@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import healthcalc.exceptions.InvalidHealthDataException;
@@ -211,43 +210,6 @@ public class BMIFullTest {
             assertThrows(InvalidHealthDataException.class, () -> healthCalc.bmiClassificationFull(bmi));
         }
 
-        /* Test adicionales para mostrar que se pueden definir de otra forma. */
-
-        @Test
-        @DisplayName("Clasificación correcta para sobrepeso (Overweight)")
-        void testBmiOverweight() throws InvalidHealthDataException {
-            double bmiLimiteInferior = 25.0;
-            double bmiMedio = 27.5;
-            double bmiLimiteSuperior = 29.99;
-
-            String resultInferior = healthCalc.bmiClassificationFull(bmiLimiteInferior);
-            String resultMedio = healthCalc.bmiClassificationFull(bmiMedio);
-            String resultSuperior = healthCalc.bmiClassificationFull(bmiLimiteSuperior);
-
-            assertAll(
-                () -> assertEquals("Overweight", resultInferior),
-                () -> assertEquals("Overweight", resultMedio),
-                () -> assertEquals("Overweight", resultSuperior)
-            );
-        }
-
-        @ParameterizedTest(name = "BMI {0} debe ser clasificado como {1}")
-        @CsvSource({
-            "10.0, Severe Thinness",
-            "18.4, Mild Thinness",
-            "18.5, Normal weight",
-            "24.9, Normal weight",
-            "25.0, Overweight",
-            "29.9, Overweight",
-            "30.0, Obese Class I",
-            "45.0, Obese Class III"
-        })
-        @DisplayName("Clasificación de BMI en los límites exactos de cada categoría")
-        void testBmiClassificationLimites(double bmi, String expectedCategory) throws InvalidHealthDataException {
-            String result = healthCalc.bmiClassificationFull(bmi);
-
-            assertEquals(expectedCategory, result);
-        }
     }
 
 }
