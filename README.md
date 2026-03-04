@@ -98,6 +98,11 @@ if (bmi < 16) {
         - **Hombres:** $PCI = (Estatura en cm - 100) - \frac{Estatura - 150}{4}$
         - **Mujeres:** $PCI = (Estatura en cm - 100) - \frac{Estatura - 150}{2}$
 
+    Información adicional: 
+    Fue desarrollada en 1929 y, a pesar de su antigüedad, sigue siendo una de las fórmulas más utilizadas en entornos clínicos de Europa debido a su gran simplicidad matemática.
+    Es especialmente precisa para personas con una estatura media (entre 140 cm y 190 cm). Además, a diferencia de otras fórmulas como la de Devine o Hamwi, la de Lorentz es más estricta con las mujeres (al dividir por 2 la desviación de la altura base), lo que suele arrojar resultados de peso ideal ligeramente más bajos para el sexo femenino.
+
+
     **Nota:** Para convertir la estatura de **cm a pulgadas**, hay que dividir los centímetros entre **2.54**.
 
 ---

@@ -36,7 +36,7 @@ public class IBWLorentzTest {
         @DisplayName("Cálculo correcto para hombres con altura estándar")
             void testIbwHombreValido() throws InvalidHealthDataException {
                 double height = 180.0;
-                double expected = 180 - 100 - ((180 - 150) / 4);
+                double expected = 180 - 100 - ((180 - 150) / 4.0);
         
                 double result = healthCalc.ibwLorentz(height, 'm');
                 assertEquals(expected, result, 0.01);
@@ -47,7 +47,7 @@ public class IBWLorentzTest {
         @DisplayName("Cálculo correcto para mujeres con altura estándar")
             void testIbwMujerValido() throws InvalidHealthDataException {
                 double height = 170.0;
-                double expected = height - 100 - ((height - 150) / 2);
+                double expected = height - 100 - ((height - 150) / 2.0);
 
                 double result = healthCalc.ibwLorentz(height, 'f');
                 assertEquals(expected, result, 0.01);
