@@ -65,23 +65,6 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
       - Obesidad Clase III ($>=40$)
 
 ---
-if (bmi < 16) {
-            result = "Severe Thinness";
-        } else if (bmi >= 16 && bmi < 17) {
-            result = "Moderate Thinness";
-        } else if (bmi >= 17 && bmi < 18.5) {
-            result = "Mild Thinness";
-        } else if (bmi >= 18.5 && bmi < 25) {
-            result = "Normal";
-        } else if (bmi >= 25 && bmi < 30) {
-            result = "Overweight";
-        } else if (bmi >= 30 && bmi < 35) {
-            result = "Obese Class I";
-        } else if (bmi >= 35 && bmi < 40) {
-            result = "Obese Class II";
-        } else if (bmi >= 40) {
-            result = "Obese Class III";
-        }
 
 ![Clasificación del estado nutricional de una persona.](resources/images/bmi.jpeg)
 
@@ -90,7 +73,7 @@ if (bmi < 16) {
 
 * **M2: Peso Corporal Ideal (PCI) o _Ideal Body Weight (IBW)_:** El PCI estima el peso teórico que se asocia con el menor riesgo de mortalidad y una mejor salud para un persona.
 
-Existen diferentes fórmulas para calcular el PCI:
+    Existen diferentes fórmulas para calcular el PCI:
 
     1. **Fórmula de Devine (1974)**
     Es la más extendida en entornos clínicos para ajustar dosis de medicamentos.
@@ -116,9 +99,9 @@ Existen diferentes fórmulas para calcular el PCI:
         - **Hombres:** $PCI = (Estatura en cm - 100) - \frac{Estatura - 150}{4}$
         - **Mujeres:** $PCI = (Estatura en cm - 100) - \frac{Estatura - 150}{2}$
 
-    Información adicional:
-    Fue desarrollada en 1929 y, a pesar de su antigüedad, sigue siendo una de las fórmulas más utilizadas en entornos clínicos de Europa debido a su gran simplicidad matemática.
-    Es especialmente precisa para personas con una estatura media (entre 140 cm y 190 cm). Además, a diferencia de otras fórmulas como la de Devine o Hamwi, la de Lorentz es más estricta con las mujeres (al dividir por 2 la desviación de la altura base), lo que suele arrojar resultados de peso ideal ligeramente más bajos para el sexo femenino.
+    **Información adicional:**
+        Fue desarrollada en 1929 y, a pesar de su antigüedad, sigue siendo una de las fórmulas más utilizadas en entornos clínicos de Europa debido a su gran simplicidad matemática.
+        Es especialmente precisa para personas con una estatura media (entre 140 cm y 190 cm). Además, a diferencia de otras fórmulas como la de Devine o Hamwi, la de Lorentz es más estricta con las mujeres (al dividir por 2 la desviación de la altura base), lo que suele arrojar resultados de peso ideal ligeramente más bajos para el sexo femenino.
 
 
     **Nota:** Para convertir la estatura de **cm a pulgadas**, hay que dividir los centímetros entre **2.54**.
