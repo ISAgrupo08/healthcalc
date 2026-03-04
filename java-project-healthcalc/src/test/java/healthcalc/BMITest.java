@@ -109,22 +109,44 @@ public class BMITest {
     @DisplayName("Clasificación básica a partir del BMI")
     class BMIClassificationTests {
 
-        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Underweight")
-        @ValueSource(doubles = {10.0, 18.4, 18.49})
-        @DisplayName("Validación de categoría Underweight (Peso bajo)")
-        void testBmiUnderweight(double bmi) throws InvalidHealthDataException {
-            String expected = "Underweight";
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Severe Thinness")
+        @ValueSource(doubles = {10.0, 15.9})
+        @DisplayName("Validación de categoría Severe Thinness (Delgadez severa)")
+        void testBmiSevereThinness(double bmi) throws InvalidHealthDataException {
+            String expected = "Severe Thinness";
             
             String result = healthCalc.bmiClassification(bmi);
 
             assertEquals(expected, result);
         }
 
-        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Normal weight")
-        @ValueSource(doubles = {18.5, 22.0, 24.9, 24.99})
-        @DisplayName("Validación de categoría Normal weight (Peso saludable)")
-        void testBmiNormalWeight(double bmi) throws InvalidHealthDataException {
-            String expected = "Normal weight";
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Moderate Thinness")
+        @ValueSource(doubles = {16.0, 16.5, 16.99})
+        @DisplayName("Validación de categoría Moderate Thinness (Delgadez moderada)")
+        void testBmiModerateThinness(double bmi) throws InvalidHealthDataException {
+            String expected = "Moderate Thinness";
+
+            String result = healthCalc.bmiClassification(bmi);
+
+            assertEquals(expected, result);
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Mild Thinness")
+        @ValueSource(doubles = {17.0, 17.8, 18.4})
+        @DisplayName("Validación de categoría Mild Thinness (Delgadez leve)")
+        void testBmiMildThinness(double bmi) throws InvalidHealthDataException {
+            String expected = "Mild Thinness";
+
+            String result = healthCalc.bmiClassification(bmi);
+
+            assertEquals(expected, result);
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Normal")
+        @ValueSource(doubles = {18.5, 22.0, 24.9})
+        @DisplayName("Validación de categoría Normal")
+        void testBmiNormal(double bmi) throws InvalidHealthDataException {
+            String expected = "Normal";
 
             String result = healthCalc.bmiClassification(bmi);
 
@@ -132,7 +154,7 @@ public class BMITest {
         }
 
         @ParameterizedTest(name = "BMI {0} debe ser clasificado como Overweight")
-        @ValueSource(doubles = {25.0, 27.5, 29.9, 29.99})
+        @ValueSource(doubles = {25.0, 27.5, 29.99})
         @DisplayName("Validación de categoría Overweight (Sobrepeso)")
         void testBmiOverweight(double bmi) throws InvalidHealthDataException {
             String expected = "Overweight";
@@ -142,11 +164,33 @@ public class BMITest {
             assertEquals(expected, result);
         }
 
-        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Obesity")
-        @ValueSource(doubles = {30.0, 35.0, 50.0})
-        @DisplayName("Validación de categoría Obesity (Obesidad)")
-        void testBmiObesity(double bmi) throws InvalidHealthDataException {
-            String expected = "Obesity";
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Obese Class I")
+        @ValueSource(doubles = {30.0, 32.5, 34.99})
+        @DisplayName("Validación de categoría Obese Class I")
+        void testBmiObeseClassI(double bmi) throws InvalidHealthDataException {
+            String expected = "Obese Class I";
+
+            String result = healthCalc.bmiClassification(bmi);
+
+            assertEquals(expected, result);
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Obesse Class II")
+        @ValueSource(doubles = {35.0, 37.5, 39.99})
+        @DisplayName("Validación de categoría Obese Class II")
+        void testBmiObeseClassII(double bmi) throws InvalidHealthDataException {
+            String expected = "Obese Class II";
+
+            String result = healthCalc.bmiClassification(bmi);
+
+            assertEquals(expected, result);
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Obesse Class III")
+        @ValueSource(doubles = {40.0, 45.0, 60.0})
+        @DisplayName("Validación de categoría Obese Class III")
+        void testBmiObeseClassIII(double bmi) throws InvalidHealthDataException {
+            String expected = "Obese Class III";
 
             String result = healthCalc.bmiClassification(bmi);
 
@@ -189,14 +233,15 @@ public class BMITest {
 
         @ParameterizedTest(name = "BMI {0} debe ser clasificado como {1}")
         @CsvSource({
-            "10.0, Underweight",
-            "18.4, Underweight",
-            "18.5, Normal weight",
-            "24.9, Normal weight",
+            "10.0, Severe Thinness",
+            "16.1, Moderate Thinness",
+            "18.4, Mild Thinness",
+            "18.5, Normal",
+            "24.9, Normal",
             "25.0, Overweight",
             "29.9, Overweight",
-            "30.0, Obesity",
-            "45.0, Obesity"
+            "30.0, Obese Class I",
+            "45.0, Obese Class III",
         })
         @DisplayName("Clasificación de BMI en los límites exactos de cada categoría")
         void testBmiClassificationLimites(double bmi, String expectedCategory) throws InvalidHealthDataException {
