@@ -324,4 +324,7 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Ejecutar los tests: Clic en Run Tests usando el IDE o con Maven: `mvn test`
 - Ejecutar los tests con informe de cobertura (previamente configurado en pom.xml): `mvn test`
 
+
+## Especificación
+### Casos de uso
 </details>
