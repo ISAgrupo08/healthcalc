@@ -329,3 +329,4 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 ## Especificación
 ### Casos de uso
 
+![Diagrama de casos de uso](doc/Diseño%20Calculadora%20de%20la%20Salud.png)
