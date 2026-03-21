@@ -325,3 +325,12 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Ejecutar los tests con informe de cobertura (previamente configurado en pom.xml): `mvn test`
 
 </details>
+
+## Especificación
+### Casos de uso
+
+![Diagrama de casos de uso](doc/Diseño%20Calculadora%20de%20la%20Salud.png)
+
+[Caso de uso BMI (CU-01)](doc/BMI.txt)
+
+[Caso de uso TMB (CU-03)](doc/Calcular%20tasa%20metabólica%20basal.txt)
