@@ -1,0 +1,36 @@
+Caso de uso: Calcular tasa metabólica basal.
+ID: CU-03
+Actor principal: Usuario.
+Ámbito: Calculadora de salud.
+Nivel: Objetivo de usuario.
+Descripción: El usuario desea calcular su tasa metabólica basal utilizando la fórmula de Katch-McArdle. El sistema solicita los datos necesarios, realiza el cálculo y devuelve el resultado.
+Interesados:
+  · Usuario: Obtener una estimación precisa de su tasa metabólica basal.
+  · Sistema: Proporcionar cálculos correctos y fiables.
+Precondiciones:
+  · El usuario dispone de su peso corporal.
+  · El usuario conoce su porcentaje de grasa corporal.
+  · El sistema está operativo.
+Disparador: El usuario solicita calcular su tasa metabólica basal.
+Garantía de éxito:
+  · El sistema calcula correctamente la tasa metabólica basal usando la fórmula de Karch-McArdle.
+  · El resultado se muestra al usuario.
+Garantía mínima:
+  · Si ocurre un error, el sistema informa al usuario.
+  · No se almacenan datos incorrectos.
+Escenario princial de éxito:
+1. El sistema solicita el peso corporal del usuario.
+2. El usuario introduce su peso.
+3. El sistema solicita el porcentaje de grasa corporal.
+4. El usuario introduce el porcentaje de grasa corporal.
+5. El sistema valida los datos introducidos.
+6. El sistema calcula la masa corporal magra.
+7. El sistema aplica la fórmula de Katch-McArdle para obtener la tasa metabólica basal.
+8. El sistema muestra el resultado al usuario.
+Extensiones:
+2a. Peso no válido: El sistema informa del error y solicita de nuevo el dato.
+4a. Porcentaje de grasa no válido: El sistema informa del error y solicita de nuevo el dato.
+5a. Datos incompletos: El sistema indica que faltan datos y vuelve al paso correspondiente.
+5b. Datos fuera de rango: El sistema muestra un error y solicita la corrección de los datos.
+7a. Error de cálculo: El sistema informa de que no se pudo realizar el cálculo y finaliza el proceso.
+Cualquier paso. El usuario cancela: El sistema detiene el proceso y borra la información proporcionada.

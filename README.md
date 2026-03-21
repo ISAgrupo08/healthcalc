@@ -330,3 +330,5 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 ### Casos de uso
 
 ![Diagrama de casos de uso](doc/Diseño%20Calculadora%20de%20la%20Salud.png)
+
+[Caso de uso TMB (CU-03)](doc/Calcular%20tasa%20metabólica%20basal.txt)
