@@ -1,0 +1,35 @@
+﻿Caso de Uso: Calcular Peso Corporal Ideal.
+ID: CU-02
+Actor principal: Usuario.
+Ámbito: Calculadora de Salud.
+Nivel: Objetivo de usuario.
+Descripción: El usuario desea calcular el peso teórico saludable y con menos riesgo de mortalidad mediante la fórmula de Lorentz. La calculadora debe validar la altura y sexo del usuario y a partir de ello proporcionará un resultado.
+Interesados: 
+· Usuario: quiere conocer su peso corporal ideal.
+· Personal médico: necesita el dato para ajustar tratamientos o dietas.
+· Sistema: quiere saber los datos y proporcionar un resultado para el usuario o paciente.
+Precondiciones:
+· El sistema debe estar operativo y accesible.
+· El usuario debe conocer su estatura (centímetros) y sexo.
+Disparador: El usuario solicita calcular su peso corporal ideal.
+Garantía de éxito:
+· El sistema muestra el peso corporal ideal usando la fórmula de Lorentz.
+Garantía mínima:
+· El sistema informará al usuario en el caso de que se produzca un error.
+· El sistema no acepta datos incorrectos.
+Escenario principal de éxito:
+1. El usuario selecciona la opción de "Calcular Peso Corporal Ideal (PCI/IBW).
+2. El sistema solicita la altura (cm) y sexo (m/f) del paciente o usuario.
+3. El usuario introduce los datos.
+4. El sistema revisa si los datos recibidos son correctos.
+5. El sistema realiza el cálculo del peso corporal ideal.
+6. El sistema aplica la fórmula de Lorentz según el sexo introducido.
+7. El sistema muestra por pantalla el resultado al usuario. 
+8. El sistema pregunta si quiere realizar otro cálculo.
+Extensiones:
+3a. Error en los datos: el sistema informa de una altura no válida y solicita de nuevo el dato.
+3b. Error en los datos: el sistema informa de que el género no es correcto y solicita de nuevo el dato.
+4a. Datos incorrectos: el sistema indica que están incompletos los datos y vuelve al paso 3.
+6a. El sistema informa de que se ha producido un error al realizar el cálculo y termina el proceso.
+7a. Fallo técnico del sistema: el sistema no muestra por pantalla el resultado y vuelve a reiniciar el sistema. 
+Cualquier paso. El usuario cancela: El sistema detiene el proceso, borra los datos proporcionados y vuelve a la pantalla de inicio.
