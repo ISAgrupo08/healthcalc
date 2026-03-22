@@ -330,8 +330,7 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 ### Casos de uso
 
 ![Diagrama de casos de uso](doc/Diseño%20Calculadora%20de%20la%20Salud.png) 
-[Fichero fuente del diagrama](https://app.diagrams.net/#G1yKmG8z8P2H9c_LWbmt2ErhvACmDzaMQL#%7B%22pageId%22%3A%22pu5A0FDp6jbR8zr-CFi0%22%7D)
-
-[Caso de uso BMI (CU-01)](doc/BMI.txt)
-[Caso de Uso PCI/IBW (CU-02)](doc/Calcular%20Peso%20Corporal%20Ideal%20(IBW).txt)
-[Caso de uso TMB (CU-03)](doc/Calcular%20tasa%20metabólica%20basal.txt)
+*[Fichero fuente del diagrama](https://app.diagrams.net/#G1yKmG8z8P2H9c_LWbmt2ErhvACmDzaMQL#%7B%22pageId%22%3A%22pu5A0FDp6jbR8zr-CFi0%22%7D)
+*[Caso de uso BMI (CU-01)](doc/BMI.txt)
+*[Caso de Uso PCI/IBW (CU-02)](doc/Calcular%20Peso%20Corporal%20Ideal%20(IBW).txt)
+*[Caso de uso TMB (CU-03)](doc/Calcular%20tasa%20metabólica%20basal.txt)
