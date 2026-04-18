@@ -199,7 +199,7 @@ public class CalculadoraGUI_Eer extends JFrame {
 		lblUnidad.setBounds(300, 300, 40, 25);
 		DatosEER.add(lblUnidad);
 		
-		JLabel lblMetrica = new JLabel("MÉTRICA REE");
+		JLabel lblMetrica = new JLabel("MÉTRICA EER");
 		lblMetrica.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblMetrica.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMetrica.setBounds(100, 45, 400, 30);

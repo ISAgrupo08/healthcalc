@@ -382,4 +382,8 @@ Para saber cuántas calorías debo consumir según mis características
 
 ### Interfaz Gráfica de Usuario
 
-[Prototipo](https://github.com/ISAgrupo08/healthcalc/blob/P4/java-project-healthcalc/doc/gui/PrototipoGUI.PNG)
+![Prototipo](java-project-healthcalc/doc/gui/PrototipoGUI.PNG)
+![Menu](java-project-healthcalc/doc/gui/CalculadoraMenu.PNG)
+![BMI](java-project-healthcalc/doc/gui/CalculadoraBMI.PNG)
+![IBW](java-project-healthcalc/doc/gui/CalculadoraIBW.PNG)
+![EER](java-project-healthcalc/doc/gui/CalculadoraEER.PNG)
