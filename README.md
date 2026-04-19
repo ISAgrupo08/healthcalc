@@ -386,8 +386,5 @@ Para saber cuántas calorías debo consumir según mis características
 ![Menu](java-project-healthcalc/doc/gui/CalculadoraMenu.PNG)
 ![BMI](java-project-healthcalc/doc/gui/CalculadoraBMI.PNG)
 ![IBW](java-project-healthcalc/doc/gui/CalculadoraIBW.PNG)
-<<<<<<< HEAD
 ![REE](java-project-healthcalc/doc/gui/CalculadoraEER.png)
-=======
 ![REE](java-project-healthcalc/doc/gui/CalculadoraGUI_EER.PNG)
->>>>>>> cbb29a69c64c590d0321c90a0a9179931654fa82
