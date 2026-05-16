@@ -17,7 +17,7 @@ public class IBWSteps {
 
     @Dado("que la calculadora de salud está operativa")
     public void que_la_calculadora_de_salud_está_operativa() {
-        this.healthcalc = new HealthCalcImpl();
+        this.healthcalc = HealthCalcImpl.getInstance();
     }
 
     @Dado("que introduzco mi sexo {string}")

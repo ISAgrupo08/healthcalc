@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         // 1. Creamos el objeto de nuestra calculadora
-        HealthCalc healthCalc = new HealthCalcImpl();
+        HealthCalc healthCalc = HealthCalcImpl.getInstance();
         // 2. Preparamos el Scanner para leer del teclado (System.in)
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("=== CALCULADORA DE SALUD Y PESO ===");
@@ -66,5 +66,6 @@ public class Main {
             //Cualquier otro error inesperado que pueda ocurrir durante la ejecución del programa.
             System.out.println("Ocurrió un error inesperado: " + e.getMessage());
         }
+
     }
 }

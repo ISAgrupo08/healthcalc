@@ -17,7 +17,7 @@ public class BMIFullSteps {
     private boolean exceptionThrown;
     @Dado("la calculadora de salud está iniciada")
     public void la_calculadora_de_salud_está_iniciada() {
-        this.healthcalc = new HealthCalcImpl();
+        this.healthcalc = HealthCalcImpl.getInstance();
     }
 
     @Dado("el peso introducido es {double}")

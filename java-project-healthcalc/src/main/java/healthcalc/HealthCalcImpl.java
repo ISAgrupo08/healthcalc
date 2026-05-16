@@ -5,6 +5,20 @@ import healthcalc.exceptions.InvalidHealthDataException;
 
 
 public class HealthCalcImpl implements HealthCalc {
+
+    // Implementación del patrón Singleton
+    private static HealthCalcImpl instance;
+
+    private HealthCalcImpl() {
+        // Constructor privado. Vacío porque no se necesita inicialización adicional.
+    }
+    
+    public static HealthCalcImpl getInstance() {
+        if (instance == null) {
+            instance = new HealthCalcImpl();
+        }
+        return instance;
+    }
     
     @Override
     public String bmiSimpleClassification(double bmi) throws InvalidHealthDataException {
