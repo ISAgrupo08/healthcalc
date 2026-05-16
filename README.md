@@ -406,6 +406,14 @@ En esta práctica se ha rediseñado y extendido la aplicación de cálculo de sa
 
 ![Diagrama UML Adapter](./design_patterns/DiagramaUML_Adapter.png)
 
+### 3. Patrón Proxy
+
+* **Propósito:** interceptar las llamadas dirigidas al sistema hospitalario (`HealthHospital`) para registrar de forma automatizada y anónima los datos introducidos y calculados de cada paciente, permitiendo obtener estadísticas e históricos globales (como medias de peso, altura e IMC) sin modificar la lógica de negocio original ni el comportamiento del cliente.
+
+* **Implementación:** la clase `ProxyHealthCalc` actúa como un intermediario inteligente implementando la interfaz `HealthHospital` y heredando también de `HealthStats`. El Proxy envuelve al adaptador real (`AdapterHospital`) y, cada vez que se solicita una métrica médica (como el IMC o el peso ideal), intercepta los parámetros de entrada y los resultados para acumularlos en variables estadísticas internas de forma transparente, delegando inmediatamente después la ejecución real en el objeto hospitalario empaquetado.
+
+![Diagrama UML Proxy](./design_patterns/DiagramaUML_Proxy.png)
+
 ### 4. Patrón Decorator
 
 ![Diagrama UML Decorator](./design_patterns/DiagramaUML_Decorator.png)
