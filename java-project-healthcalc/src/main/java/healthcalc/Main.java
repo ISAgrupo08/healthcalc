@@ -67,5 +67,25 @@ public class Main {
             System.out.println("Ocurrió un error inesperado: " + e.getMessage());
         }
 
+        System.out.println("Patron Adapter");
+        HealthHospital sistemaHospital =new AdapterHospital(healthCalc);
+
+        try{
+            int peso = 80000;
+            float altura = 1.80f;
+            char sexo = 'm';
+
+            System.out.println("Enviando datos traducidos -> Altura: " + altura + "m, Peso: " + peso + "g, Sexo: " + sexo);
+
+            Tuple<Float, String> resultado = sistemaHospital.indiceMasaCorporal(altura, peso);
+            System.out.println("Resultado del índice de masa corporal: " + resultado.getFirst() + " - " + resultado.getSecond());
+
+            int ibwHospital = sistemaHospital.pesoCorporalIdeal(sexo, altura);
+            System.out.println("Peso corporal ideal según el hospital: " + ibwHospital + " kg");
+
+        } catch (Exception e) {
+            System.out.println("Error en el sistema del hospital: " + e.getMessage());
+        }
+
     }
 }

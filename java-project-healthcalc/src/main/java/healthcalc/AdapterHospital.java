@@ -12,10 +12,9 @@ public class AdapterHospital implements HealthHospital {
     public Tuple<Float, String> indiceMasaCorporal(float altura, int peso) {
         try {
             // Adaptación: Gramos a Kilos
-            double pesoKilos = peso * 1000.0;
+            double pesoKilos = peso / 1000.0;
 
-            // Adaptación: Centímetros a Metros
-            double alturaMetros = altura / 100.0;
+            double alturaMetros = (double) altura;
 
             double bmi = calc.bmi(pesoKilos, alturaMetros);
             String classification = calc.bmiClassification(bmi);
@@ -30,7 +29,7 @@ public class AdapterHospital implements HealthHospital {
     public int pesoCorporalIdeal(char genero, float altura) {
         try {
             // Adaptación: Centímetros a Metros
-            double alturaMetros = altura / 100.0;
+            double alturaMetros = altura * 100.0;
             double pesocorporalIdeal = calc.ibwLorentz(alturaMetros, genero);
 
             return (int) pesocorporalIdeal;
