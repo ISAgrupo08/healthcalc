@@ -413,3 +413,7 @@ En esta práctica se ha rediseñado y extendido la aplicación de cálculo de sa
 * **Implementación:** la clase `ProxyHealthCalc` actúa como un intermediario inteligente implementando la interfaz `HealthHospital` y heredando también de `HealthStats`. El Proxy envuelve al adaptador real (`AdapterHospital`) y, cada vez que se solicita una métrica médica (como el IMC o el peso ideal), intercepta los parámetros de entrada y los resultados para acumularlos en variables estadísticas internas de forma transparente, delegando inmediatamente después la ejecución real en el objeto hospitalario empaquetado.
 
 ![Diagrama UML Proxy](./design_patterns/DiagramaUML_Proxy.png)
+
+### 4. Patrón Decorator
+
+![Diagrama UML Decorator](./design_patterns/DiagramaUML_Decorator.png)
