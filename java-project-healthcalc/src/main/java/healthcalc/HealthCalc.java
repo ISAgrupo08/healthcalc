@@ -9,6 +9,7 @@ import healthcalc.exceptions.InvalidHealthDataException;
  *
  */	
 public interface HealthCalc {
+	
 
 	/**
 	 * Calculate the BMI classification of a person.
