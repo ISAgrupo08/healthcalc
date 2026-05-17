@@ -1,0 +1,95 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" scale="1" border="0">
+  <diagram name="Página-1" id="pu5A0FDp6jbR8zr-CFi0">
+    <mxGraphModel dx="1373" dy="713" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-1" edge="1" parent="1" source="mMtXOz7E_klh4UmhtIR0-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;endArrow=block;endFill=0;" target="mMtXOz7E_klh4UmhtIR0-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-2" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="HealthCalcImpl" vertex="1">
+          <mxGeometry height="150" width="440" x="550" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-3" edge="1" parent="mMtXOz7E_klh4UmhtIR0-2" source="mMtXOz7E_klh4UmhtIR0-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-50" y="39" />
+              <mxPoint x="-50" y="80" />
+            </Array>
+            <mxPoint y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-4" parent="mMtXOz7E_klh4UmhtIR0-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- instance: HealthCalcImpl {static}&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="26" width="440" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-5" parent="mMtXOz7E_klh4UmhtIR0-2" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="440" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-6" parent="mMtXOz7E_klh4UmhtIR0-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- HealthCalcImpl()&lt;div&gt;+ getInstance(): HealthCalcImpl {static}&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;+ bmi(weight: double, height: double): double&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;+ ibw(height: double, gender: char): double&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;+ eer(height: double, weight: double, age: int, gender: string, activity: string)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="440" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-7" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;HealthCalc&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;bmi(weight: double, height: double): double&lt;br&gt;+ ibw(height: double, gender: char): double&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ eer(height: double, weight: double, age: int, gender: string, activity: string)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="410" x="565" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;- instance&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="90" x="414" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-9" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CalculadoraGUI_Inicio&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;br&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="30" width="140" x="1180" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-10" edge="1" parent="1" source="mMtXOz7E_klh4UmhtIR0-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0;entryDx=0;entryDy=0;endArrow=open;endFill=0;" target="mMtXOz7E_klh4UmhtIR0-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&amp;lt;&amp;lt;use&amp;gt;&amp;gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="1100" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-12" edge="1" parent="1" source="mMtXOz7E_klh4UmhtIR0-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.858;entryY=-0.04;entryDx=0;entryDy=0;endArrow=open;endFill=0;entryPerimeter=0;" target="mMtXOz7E_klh4UmhtIR0-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-13" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Main&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="20" width="90" x="1110" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&amp;lt;&amp;lt;use&amp;gt;&amp;gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="980" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-15" edge="1" parent="1" source="mMtXOz7E_klh4UmhtIR0-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;endArrow=open;endFill=0;" target="mMtXOz7E_klh4UmhtIR0-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-16" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CalculadoraGUI_BMI&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="30" width="120" x="1200" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="mMtXOz7E_klh4UmhtIR0-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&amp;lt;&amp;lt;use&amp;gt;&amp;gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="1030" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCGU9idbWm61MPYdHtQ-6" edge="1" parent="1" source="XXCGU9idbWm61MPYdHtQ-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;endArrow=open;endFill=0;" target="mMtXOz7E_klh4UmhtIR0-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCGU9idbWm61MPYdHtQ-3" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CalculadoraGUI_IBW&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="30" width="120" x="1200" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCGU9idbWm61MPYdHtQ-4" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CalculadoraGUI_EER&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="30" width="120" x="1200" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCGU9idbWm61MPYdHtQ-7" edge="1" parent="1" source="XXCGU9idbWm61MPYdHtQ-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="947" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XXCGU9idbWm61MPYdHtQ-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&amp;lt;&amp;lt;use&amp;gt;&amp;gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="1100" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCGU9idbWm61MPYdHtQ-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&amp;lt;&amp;lt;use&amp;gt;&amp;gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="1050" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCGU9idbWm61MPYdHtQ-15" edge="1" parent="1" source="XXCGU9idbWm61MPYdHtQ-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;dashed=1;dashPattern=1 2;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XXCGU9idbWm61MPYdHtQ-14" parent="1" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=24;verticalAlign=top;align=center;" value="&lt;span id=&quot;docs-internal-guid-5cedc8ed-7fff-e636-bc3d-5138603a185b&quot;&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;&quot;&gt;&lt;span style=&quot;font-family: Arial, sans-serif; background-color: transparent; font-variant: normal; vertical-align: baseline; white-space: pre-wrap;&quot;&gt;&lt;font&gt;if (instance==null) {&lt;/font&gt;&lt;/span&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;&quot;&gt;&lt;font&gt;&lt;span style=&quot;font-family: Arial, sans-serif; background-color: transparent; font-variant: normal; vertical-align: baseline; white-space: pre-wrap;&quot;&gt;&lt;span class=&quot;Apple-tab-span&quot; style=&quot;white-space:pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-family: Arial, sans-serif; background-color: transparent; font-variant: normal; vertical-align: baseline; white-space: pre-wrap;&quot;&gt;instance = new HealthCalcImpl()&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;&quot;&gt;&lt;span style=&quot;font-family: Arial, sans-serif; background-color: transparent; font-variant: normal; vertical-align: baseline; white-space: pre-wrap;&quot;&gt;&lt;font&gt;}&lt;/font&gt;&lt;/span&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;&quot;&gt;&lt;span style=&quot;font-family: Arial, sans-serif; background-color: transparent; font-variant: normal; vertical-align: baseline; white-space: pre-wrap;&quot;&gt;&lt;font&gt;return instance;&lt;/font&gt;&lt;/span&gt;&lt;/p&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11pt; font-family: Arial, sans-serif; background-color: transparent; font-variant: normal; vertical-align: baseline; white-space: pre-wrap;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="260" x="620" y="650" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
