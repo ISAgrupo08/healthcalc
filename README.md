@@ -416,4 +416,8 @@ En esta práctica se ha rediseñado y extendido la aplicación de cálculo de sa
 
 ### 4. Patrón Decorator
 
+* **Propósito:** permitir añadir responsabilidades adicionales de forma dinámica y combinable a la calculadora original (HealthCalc), como la conversión automática a sistemas de unidades extranjeros (versión europea con altura en metros y peso en gramos, y americana con altura en pies y peso en libras) y la generación automatizada de mensajes con los resultados del "IMC" en diferentes idiomas (español e inglés), todo ello sin alterar la lógica de negocio existente y reutilizando la estructura implementada.
+
+* **Implementación:** se han definido unas clases abstractas base "BaseDecoratorRegion" que implementa la interfaz HealthCalc y mantiene una referencia interna (un campo protegido de agregación) hacia un objeto del mismo tipo de la interfaz. A partir de ella se extienden dos familias de decoradores concretos: los decoradores de conversión de unidades (EU y USA), que interceptan los parámetros de entrada no estándar para transformarlos al Sistema Internacional antes de delegar la operación; y la otra clase abstracta "BaseDecoratorLanguage" (Español e English), que ejecutan el cálculo base y añaden la impresión formateada del mensaje por pantalla. Este diseño permite "apilar" capas de envolturas (wrappers) de forma flexible (por ejemplo, una calculadora americana que imprima en inglés) de manera transparente para el cliente.
+
 ![Diagrama UML Decorator](./design_patterns/DiagramaUML_Decorator.png)
