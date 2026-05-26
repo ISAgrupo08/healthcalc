@@ -99,4 +99,6 @@ public class Main {
         System.out.println("IMC medio: " + String.format("%.2f", Stats.imcMedio()));
 
     }
+
+    // Aquí podríamos agregar métodos auxiliares para validar la entrada del usuario, formatear resultados, etc.
 }
