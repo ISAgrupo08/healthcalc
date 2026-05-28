@@ -8,6 +8,8 @@ import io.cucumber.java.es.Entonces;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//Realizamos pruebas para el cálculo del IBW usando la fórmula de Lorentz, que es una de las fórmulas más comunes para calcular el peso ideal. 
+
 public class IBWSteps {
     private HealthCalcImpl healthcalc;
     private String sexo;    
