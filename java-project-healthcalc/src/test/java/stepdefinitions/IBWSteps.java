@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import healthcalc.Gender;
 import healthcalc.HealthCalcImpl;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Cuando;
@@ -8,11 +9,10 @@ import io.cucumber.java.es.Entonces;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//Realizamos pruebas para el cálculo del IBW usando la fórmula de Lorentz, que es una de las fórmulas más comunes para calcular el peso ideal. 
 
 public class IBWSteps {
     private HealthCalcImpl healthcalc;
-    private String sexo;    
+    private Gender genero;   
     private double altura;
     private double resultado;
     private boolean exceptionThrown;
@@ -23,8 +23,22 @@ public class IBWSteps {
     }
 
     @Dado("que introduzco mi sexo {string}")
-    public void que_introduzco_mi_sexo(String string) {
-        this.sexo = string;
+    public void que_introduzco_mi_sexo(String genderStr) {
+        if (genderStr == null || genderStr.isEmpty()) {
+            this.genero = null;
+            return;
+        }
+
+        // Tomamos la primera letra del string, la convertimos a mayúscula y la usamos para determinar el género
+        char firstChar = Character.toUpperCase(genderStr.trim().charAt(0));
+            
+        if (firstChar == 'M' || firstChar == 'H') {
+            this.genero = Gender.MALE;     // Masculino / Hombre / Male -> MALE
+        } else if (firstChar == 'F' || firstChar == 'W') {
+            this.genero = Gender.FEMALE;   // Femenino / Woman -> FEMALE
+        } else {
+            this.genero = null;            // Caso de sexo inválido
+        }
     }
 
     @Dado("introduzco mi altura {string}")
@@ -35,7 +49,15 @@ public class IBWSteps {
     @Cuando("solicito calcular el peso corporal ideal")
     public void solicito_calcular_el_peso_corporal_ideal() {
         try {
-            this.resultado = healthcalc.ibwLorentz(altura, sexo.toLowerCase().charAt(0));
+            // Si el género es nulo (datos inválidos o incompletos), lanzamos excepción 
+            if (this.genero == null) {
+                throw new IllegalArgumentException("Sexo no válido o no proporcionado");
+            }
+            
+            // Adaptamos temporalmente el enum al char (m o f) que espera la calculadora antigua
+            char sexoChar = (this.genero == Gender.MALE) ? 'm' : 'f';
+            
+            this.resultado = healthcalc.ibwLorentz(altura, sexoChar);
             exceptionThrown = false;   
         } catch (Exception e) {
             exceptionThrown = true;
@@ -57,8 +79,7 @@ public class IBWSteps {
 
     @Dado("que no he introducido todos los datos requeridos")
     public void que_no_he_introducido_todos_los_datos_requeridos() {
-        // Simulamos datos incompletos dejando el sexo vacío o la altura en 0. Aquí optamos por dejar el sexo vacío.
-        this.sexo = ""; 
+        this.genero = null;
     }
 
     @Entonces("el sistema muestra un mensaje de error indicando datos incompletos")
@@ -68,7 +89,7 @@ public class IBWSteps {
 
     @Dado("que introduzco un sexo {string}")
     public void que_introduzco_un_sexo(String string) {
-        this.sexo = string;
+        que_introduzco_mi_sexo(string);
     }
 
     @Dado("introduzco una altura {string}")
