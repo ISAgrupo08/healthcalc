@@ -107,4 +107,14 @@ public class HealthCalcImpl implements BasalMetabolicIndex, EstimatedEnergyRequi
         }
         return (float) (resultado * factorActividad);    
     }
+
+    public double basalMetabolicIndex(double peso, double alturaMetros) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'basalMetabolicIndex'");
+    }
+
+    public double estimatedEnergyRequirement(String sexo, int edad, double peso, double altura, String actividad) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'estimatedEnergyRequirement'");
+    }
 }
