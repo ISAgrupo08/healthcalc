@@ -36,7 +36,7 @@ public class BMIFullSteps {
     @Cuando("ejecuto la operación de BMI")
     public void ejecuto_la_operación_de_BMI() {
         try {
-            Person person = new PersonImpl(this.weight, this.height/100.0, null, 0);
+            Person person = new PersonImpl(this.weight, this.height/100.0, null, 0, null);
             this.bmi = calculadora.basalMetabolicIndex(person);
             exceptionThrown = false;
         } catch (Exception e) {
