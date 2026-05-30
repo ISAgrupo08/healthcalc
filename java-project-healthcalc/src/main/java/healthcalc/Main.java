@@ -15,8 +15,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         // 1. Creamos el objeto de nuestra calculadora
-        HealthCalc healthCalc = HealthCalcImpl.getInstance();
-        HealthHospital sistemaHospital =new AdapterHospital(healthCalc);
+        HealthCalcImpl healthCalc = HealthCalcImpl.getInstance();
+        HealthHospital sistemaHospital = new AdapterHospital(healthCalc);
         ProxyHealthCalc Proxy = new ProxyHealthCalc(sistemaHospital);
         HealthHospital HospitalConProxy = Proxy;
         HealthStats Stats = Proxy;
