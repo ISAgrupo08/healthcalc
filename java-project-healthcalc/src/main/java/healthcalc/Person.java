@@ -1,8 +1,8 @@
 package healthcalc;
 
 public interface Person {
-    float weight();
-    float height();
+    double weight();
+    double height();
     Gender gender();
     int age();
 }

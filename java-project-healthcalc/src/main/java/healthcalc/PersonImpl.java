@@ -1,13 +1,13 @@
 package healthcalc;
 
 public class PersonImpl implements Person {
-    private final float weight;
-    private final float height;
+    private final double weight;
+    private final double height;
     private final Gender gender;
     private final int age;
 
     // El constructor para crear instancias de Person
-    public PersonImpl(float weight, float height, Gender gender, int age) {
+    public PersonImpl(double weight, double height, Gender gender, int age) {
         this.weight = weight;
         this.height = height;
         this.gender = gender;
@@ -15,12 +15,12 @@ public class PersonImpl implements Person {
     }
 
     @Override
-    public float weight() {
+    public double weight() {
         return this.weight;
     }
 
     @Override
-    public float height() {
+    public double height() {
         return this.height;
     }
 
