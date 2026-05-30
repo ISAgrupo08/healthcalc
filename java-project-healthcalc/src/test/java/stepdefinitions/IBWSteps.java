@@ -56,7 +56,7 @@ public class IBWSteps {
                 throw new IllegalArgumentException("Sexo no válido o no proporcionado");
             }
             
-            Person persona = new healthcalc.PersonImpl(70.0f, (float) this.altura, this.genero, 25);
+            Person persona = new healthcalc.PersonImpl(70.0f, (float) this.altura, this.genero, 25, null);
             this.resultado = this.healthcalc.idealBodyWeight(persona);
             
             exceptionThrown = false;   

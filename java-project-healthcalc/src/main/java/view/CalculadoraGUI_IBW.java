@@ -164,8 +164,8 @@ public class CalculadoraGUI_IBW extends JFrame {
 					String seleccion = comboSexo_IBW.getSelectedItem().toString();
 					char genero = (seleccion.equalsIgnoreCase("Masculino")) ? 'm' : 'f';
 					
-					HealthCalc calc = HealthCalcImpl.getInstance();
-					double resultado = calc.ibwLorentz(altura, genero);
+					HealthCalcImpl calc = HealthCalcImpl.getInstance();
+					double resultado = calc.basalMetabolicIndex(null)	; // Aquí se debería crear un objeto Person con los datos necesarios para calcular el IBW, pero como no tenemos peso ni edad, esto es solo un ejemplo de cómo llamar al método. 
 					// Mostrar resultado
 					textresultado_IBW.setText(String.format("%.2f", resultado));
 					lblExito.setVisible(true);

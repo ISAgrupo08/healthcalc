@@ -4,7 +4,7 @@ import healthcalc.exceptions.InvalidHealthDataException;
 
 
 
-public class HealthCalcImpl implements BasalMetabolicIndex, IdealBodyWeight {
+public class HealthCalcImpl implements BasalMetabolicIndex, IdealBodyWeight, EstimatedEnergyRequirement {
 
     // Implementación del patrón Singleton
     private static HealthCalcImpl instance;
@@ -71,5 +71,56 @@ public class HealthCalcImpl implements BasalMetabolicIndex, IdealBodyWeight {
         } else {
             throw new InvalidHealthDataException("Gender must be either MALE or FEMALE.");
         }
+    }
+
+    public float estimatedEnergyRequirement(Person person) throws InvalidHealthDataException {
+
+        if (person == null || person.gender() == null || person.activity() == null) {
+            throw new InvalidHealthDataException("Datos incompletos.");
+        }
+
+        double peso = person.weight();
+        double altura = person.height();
+        int edad = person.age();
+        String actividad = person.activity();
+        
+        if (edad < 0 || peso <= 0 || altura <= 30 || edad > 130 || peso > 700 || altura > 300) {
+            throw new InvalidHealthDataException("Datos fuera de rango.");
+        }
+
+        double resultado;
+        if (person.gender() == Gender.MALE) {
+            resultado = 88.362 + (13.397 * peso) + (4.799 * altura) - (5.677 * edad);
+        } else if (person.gender() == Gender.FEMALE) {
+            resultado = 447.593 + (9.247 * peso) + (3.098 * altura) - (4.330 * edad);
+        } else {
+            throw new InvalidHealthDataException("Sexo debe ser 'masculino' o 'femenino'.");
+        }
+        double factorActividad;
+        switch (actividad.toLowerCase()) {
+            case "sedentario":
+            case "sedentaria":
+                factorActividad = 1.2;
+                break;
+            case "ligero":
+            case "ligera":
+                factorActividad = 1.375;
+                break;
+            case "moderado":
+            case "moderada":
+                factorActividad = 1.55;
+                break;
+            case "activo":
+            case "activa":
+                factorActividad = 1.725;
+                break;
+            case "muy activo":
+            case "muy activa":
+                factorActividad = 1.9;
+                break;
+            default:
+                throw new InvalidHealthDataException("Nivel de actividad no reconocido.");
+        }
+        return (float) (resultado * factorActividad);    
     }
 }

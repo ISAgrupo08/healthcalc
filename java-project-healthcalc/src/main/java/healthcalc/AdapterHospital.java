@@ -15,7 +15,7 @@ public class AdapterHospital implements HealthHospital {
             double pesoKilos = peso / 1000.0;
             double alturaMetros = (double) altura;
 
-            Person persona = new PersonImpl((float) pesoKilos, (float) alturaMetros, null, 25);  
+            Person persona = new PersonImpl((float) pesoKilos, (float) alturaMetros, null, 25, null);  
 
             double bmi = calc.basalMetabolicIndex(persona);
             BMICategory category = calc.category(persona);
@@ -41,7 +41,7 @@ public class AdapterHospital implements HealthHospital {
             // Adaptación: Centímetros a Metros
             double alturaMetros = altura * 100.0;
 
-            Person persona = new PersonImpl(70.0f, (float) alturaMetros, genderEnum, 25);
+            Person persona = new PersonImpl(70.0f, (float) alturaMetros, genderEnum, 25, null);
             double pesocorporalIdeal = calc.idealBodyWeight(persona);
 
             return (int) pesocorporalIdeal;
