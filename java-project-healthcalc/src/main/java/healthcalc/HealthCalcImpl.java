@@ -67,7 +67,7 @@ public class HealthCalcImpl implements BasalMetabolicIndex, IdealBodyWeight, Est
         if (gender == Gender.MALE) {
             return (float) ((height - 100) - ((height - 150) / 4.0));
         } else if (gender == Gender.FEMALE) {
-            return (float) ((height - 100) - ((height - 150) / 2.5));
+            return (float) ((height - 100) - ((height - 150) / 2.0));
         } else {
             throw new InvalidHealthDataException("Gender must be either MALE or FEMALE.");
         }
