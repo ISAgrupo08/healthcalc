@@ -461,3 +461,23 @@ En esta práctica se ha rediseñado y extendido la aplicación de cálculo de sa
 3. **Tipo / Categoría del refactoring:** Class Refactoring. 
 4. **Descripción del cambio:** Se ha creado la interfaz BasalMetabolicIndex para estandarizar las operaciones de cálculo metabólico y categorización. Esto aísla la interfaz de usuario de las implementaciones concretas, permitiendo cambiar el algoritmo de cálculo (ej: de Mifflin-St Jeor a Harris-Benedict) sin tocar el resto del sistema. 
 5. **Número de cambios:** Creación de 1 interfaz (BasalMetabolicIndex.java) y refactorización de 1 clase existente (BasalMetabolicIndexImpl) para implementar la interfaz.
+
+---
+
+### REFACTORING 5: Definición del contrato de cálculo del peso ideal (IdealBodyWeight)
+
+1. Bad Smell / Problema: Parámetros largos (Long Parameter List) y Obsesión por los primitivos (Primitive Obsession). La lógica de cálculo del peso ideal dependía de datos primitivos sueltos en lugar de estar guiada por un contrato de diseño claro y desacoplado. 
+2. Refactoring aplicado: Extract Interface (Extracción de interfaz) y Preserve Whole Object (Preservar el objeto completo). 
+3. Tipo / Categoría del refactoring: Class Refactoring / Method Refactoring. 
+4. Descripción del cambio: Se ha extraído la responsabilidad del cálculo del peso ideal de la calculadora central hacia un componente especializado. Para ello, se ha creado la interfaz `IdealBodyWeight` que define el contrato del cálculo.
+5. Número de cambios: hemos creado la interfaz IdealBodyWeight y hemos tenido que implementarla en HealthCalcImpl. Es decir, hemos tenido que refactorizar 5 o 6 clases para que pueda compilar con el refactoring IdealBodyWeight.
+
+---
+
+### REFACTORING 6: Especialización del Requerimiento Energético Estimado (EstimatedEnergyRequirement)
+
+1. Bad Smell / Problema: Nombre misterioso (Mysterious Name) debido a los identificadores genéricos del esquema base ("OtraMétrica" y "m()") , sumado a una Envidia de características (Feature Envy) al necesitar acceder a prácticamente todos los atributos biométricos del paciente. 
+2. Refactoring aplicado: Rename Interface / Method (Renombrar interfaz y método) y Extract Interface (Extracción de interfaz). 
+3. Tipo / Categoría del refactoring: Class Refactoring / Method Refactoring. 
+4. Descripción del cambio: Se ha renombrado de forma semántica la interfaz genérica por EstimatedEnergyRequirement y su método por estimatedEnergyRequirement(Person person). Además, se ha extendido de forma proactiva la interfaz Person introduciendo el método activity() para encapsular el nivel de actividad, logrando de este modo que la función reciba únicamente la abstracción del paciente y limpie por completo los primitivos sueltos. 
+5. Número de cambios: Creación de la interfaz (EstimatedEnergyRequirement.java), adición de una firma de método en la interfaz Person junto con su correspondiente clase de datos, y adaptación/retipado del método matemático interno de double a float en HealthCalcImpl mediante un cast de retorno. Adicionalmente, hemos tenido que refactorizar una alrededor de 7 clases para que pueda compilar con el refactoring EstimatedEnergyRequirement.
