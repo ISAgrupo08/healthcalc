@@ -459,8 +459,8 @@ En esta práctica se ha rediseñado y extendido la aplicación de cálculo de sa
 1. **Bad Smell / Problema:** Shotgun Surgery (Cirugía de escopeta). Cualquier cambio en la lógica de cálculo metabólico obligaba a modificar múltiples clases de la capa de presentación y de lógica, al no existir un contrato único que definiera qué hace una calculadora de BMR. 
 2. **Refactoring aplicado:** Extract Interface (Extracción de interfaz). 
 3. **Tipo / Categoría del refactoring:** Class Refactoring. 
-4. **Descripción del cambio:** Se ha creado la interfaz BasalMetabolicIndex para estandarizar las operaciones de cálculo metabólico y categorización. Esto aísla la interfaz de usuario de las implementaciones concretas, permitiendo cambiar el algoritmo de cálculo (ej: de Mifflin-St Jeor a Harris-Benedict) sin tocar el resto del sistema. 
-5. **Número de cambios:** Creación de 1 interfaz (BasalMetabolicIndex.java) y refactorización de 1 clase existente (BasalMetabolicIndexImpl) para implementar la interfaz.
+4. **Descripción del cambio:** Se ha creado la interfaz BasalMetabolicIndex para estandarizar las operaciones de cálculo metabólico.
+5. **Número de cambios:** Creación de 1 interfaz (BasalMetabolicIndex.java) y refactorización de 1 clase existente (HealthCalcImpl) para implementar la interfaz.
 
 ---
 

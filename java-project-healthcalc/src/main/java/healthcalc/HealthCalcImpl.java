@@ -39,20 +39,32 @@ public class HealthCalcImpl implements BasalMetabolicIndex, IdealBodyWeight, Est
     }
 
     public BMICategory category(Person person) throws InvalidHealthDataException {
-        double bmi = basalMetabolicIndex(person);
-        // Tratamos los posibles errores
+        float bmi = this.basalMetabolicIndex(person); 
+        
         if (bmi < 0) {
-            throw new InvalidHealthDataException("BMI must be a positive value.");
+            throw new InvalidHealthDataException("El BMI no puede ser negativo.");
         }
         if (bmi > 150) {
-            throw new InvalidHealthDataException("BMI must be within a possible biological range [0-150].");
+            throw new InvalidHealthDataException("El BMI debe estar dentro de un rango posible [0-150].");
         }
-        for (BMICategory category : BMICategory.values()) {
-            if (bmi >= category.getMin() && bmi < category.getMax()) {
-                return category;
-            }
+        
+        if (bmi < 16.0f) {
+            return BMICategory.SEVERE_THINNESS;
+        } else if (bmi < 17.0f) {
+            return BMICategory.MODERATE_THINNESS;
+        } else if (bmi < 18.5f) {
+            return BMICategory.MILD_THINNESS;
+        } else if (bmi < 25.0f) {
+            return BMICategory.NORMAL;
+        } else if (bmi < 30.0f) {
+            return BMICategory.OVERWEIGHT;
+        } else if (bmi < 35.0f) {
+            return BMICategory.OBESE_CLASS_I;
+        } else if (bmi < 40.0f) {
+            return BMICategory.OBESE_CLASS_II;
+        } else {
+            return BMICategory.OBESE_CLASS_III;
         }
-        throw new InvalidHealthDataException("BMI value is out of any defined category range.");
     }
 
     public float idealBodyWeight(Person person) throws InvalidHealthDataException {
