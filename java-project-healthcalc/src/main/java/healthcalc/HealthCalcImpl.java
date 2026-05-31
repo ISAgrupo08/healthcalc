@@ -4,12 +4,10 @@ import healthcalc.exceptions.InvalidHealthDataException;
 
 
 
-public class HealthCalcImpl implements BasalMetabolicIndex, EstimatedEnergyRequirement {
+public class HealthCalcImpl implements BasalMetabolicIndex, IdealBodyWeight, EstimatedEnergyRequirement {
 
     // Implementación del patrón Singleton
     private static HealthCalcImpl instance;
-
-
 
     private HealthCalcImpl() {
         // Constructor privado. Vacío porque no se necesita inicialización adicional.
@@ -55,6 +53,24 @@ public class HealthCalcImpl implements BasalMetabolicIndex, EstimatedEnergyRequi
             }
         }
         throw new InvalidHealthDataException("BMI value is out of any defined category range.");
+    }
+
+    public float idealBodyWeight(Person person) throws InvalidHealthDataException {
+        double height = person.height();
+        Gender gender = person.gender();
+        if (height <= 0) {
+            throw new InvalidHealthDataException("Height must be positive.");
+        }
+        if (height < 30 || height > 250) {
+            throw new InvalidHealthDataException("Height must be within a possible biological range [30-250] cm.");
+        }
+        if (gender == Gender.MALE) {
+            return (float) ((height - 100) - ((height - 150) / 4.0));
+        } else if (gender == Gender.FEMALE) {
+            return (float) ((height - 100) - ((height - 150) / 2.5));
+        } else {
+            throw new InvalidHealthDataException("Gender must be either MALE or FEMALE.");
+        }
     }
 
     public float estimatedEnergyRequirement(Person person) throws InvalidHealthDataException {
