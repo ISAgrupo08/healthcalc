@@ -15,8 +15,8 @@ public class BMIFullSteps {
     private BasalMetabolicIndex calculadora;
     private double weight;
     private double height;
-    private BMICategory bmiClasification;
     private double bmi;
+    private BMICategory bmiClasification;
     private boolean exceptionThrown;
     @Dado("la calculadora de salud está iniciada")
     public void la_calculadora_de_salud_está_iniciada() {
@@ -38,6 +38,7 @@ public class BMIFullSteps {
         try {
             Person person = new PersonImpl(this.weight, this.height/100.0, null, 0, null);
             this.bmi = calculadora.basalMetabolicIndex(person);
+            this.bmiClasification = calculadora.category(person);
             exceptionThrown = false;
         } catch (Exception e) {
             exceptionThrown = true;
@@ -50,6 +51,7 @@ public class BMIFullSteps {
         // Dice: "Si la diferencia es menor a 0.01, acéptalo como válido".
         assertEquals(double1, this.bmi, 0.01);
     }
+    
     @Entonces("el resultado debe ser {string}")
     public void el_resultado_debe_ser(String String1) {
          assertEquals(String1, this.bmiClasification.getEtiqueta());
