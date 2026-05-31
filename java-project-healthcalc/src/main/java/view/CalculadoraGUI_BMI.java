@@ -16,8 +16,11 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.TitledBorder;
 
+import healthcalc.BasalMetabolicIndex;
 import healthcalc.HealthCalc;
 import healthcalc.HealthCalcImpl;
+import healthcalc.Person;
+import healthcalc.PersonImpl;
 import healthcalc.exceptions.InvalidHealthDataException;
 
 import javax.swing.JLabel;
@@ -229,10 +232,11 @@ public class CalculadoraGUI_BMI extends JFrame {
 	             // Convertimos la altura de cm a metros para que HealthCalcImpl no lance excepción de rango
 	                double alturaCm = Double.parseDouble(strAltura);
 	                double alturaMetros = alturaCm / 100.0;
-	                
-                    HealthCalc calc = HealthCalcImpl.getInstance();
-                    double bmi = calc.bmi(peso, alturaMetros);
-                    String clasificacion = calc.bmiClassification(bmi);
+	                Person persona = new PersonImpl(peso, alturaMetros, null, 0, null);
+
+	    		    BasalMetabolicIndex calculadora = HealthCalcImpl.getInstance();
+                    double bmi = calculadora.basalMetabolicIndex(persona);
+                    String clasificacion = calculadora.category(persona).getEtiqueta();
                     
                     // Mostrar resultado
                     textResultadoBMI.setText(String.format("%.2f", bmi));

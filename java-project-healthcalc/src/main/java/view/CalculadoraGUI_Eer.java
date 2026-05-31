@@ -13,8 +13,13 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 
+import healthcalc.EstimatedEnergyRequirement;
+import healthcalc.BasalMetabolicIndex;
+import healthcalc.Gender;
 import healthcalc.HealthCalc;
 import healthcalc.HealthCalcImpl;
+import healthcalc.Person;
+import healthcalc.PersonImpl;
 import healthcalc.exceptions.InvalidHealthDataException;
 
 import javax.swing.border.EtchedBorder;
@@ -277,7 +282,7 @@ public class CalculadoraGUI_Eer extends JFrame {
 					int edad = Integer.parseInt(tfEdad_EER.getText());
 					
 					String sexo = comboSexo_EER.getSelectedItem().toString();
-					
+					Gender gender = comboSexo_EER.getSelectedItem().toString().equals("Masculino") ? Gender.MALE : Gender.FEMALE;
 					String actividad = "";
 		            if (rdbtnSedentario.isSelected()) actividad = "Sedentario";
 		            else if (rdbtnLigero.isSelected()) actividad = "Ligero";
@@ -285,8 +290,10 @@ public class CalculadoraGUI_Eer extends JFrame {
 		            else if (rdbtnActivo.isSelected()) actividad = "Activo";
 		            else if (rdbtnMuyActivo.isSelected()) actividad = "Muy Activo";
 					
-					HealthCalc calc = HealthCalcImpl.getInstance();
-					double resultado = calc.eer(sexo, edad, peso, altura, actividad);
+					Person persona = new PersonImpl(peso, altura, gender,edad,actividad);
+
+	    		    EstimatedEnergyRequirement calculadora = HealthCalcImpl.getInstance();
+					float resultado = calculadora.estimatedEnergyRequirement(persona);
 					tfResultado_EER.setText(String.format("%.2f", resultado));
 					lblExito.setVisible(true);
 					
