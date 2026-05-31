@@ -13,12 +13,15 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 
+import healthcalc.EstimatedEnergyRequirement;
+import healthcalc.BasalMetabolicIndex;
+import healthcalc.Gender;
 import healthcalc.HealthCalc;
 import healthcalc.HealthCalcImpl;
 import healthcalc.Gender;
 import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.Person;
-
+import healthcalc.PersonImpl;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -288,8 +291,10 @@ public class CalculadoraGUI_Eer extends JFrame {
 					else if (rdbtnActivo.isSelected()) actividad = "Activo";
 					else if (rdbtnMuyActivo.isSelected()) actividad = "Muy Activo";
 					
-					HealthCalcImpl calc = HealthCalcImpl.getInstance();
-					double resultado = calc.estimatedEnergyRequirement(null);
+					Person persona = new PersonImpl(peso, altura, genero,edad,actividad);
+
+	    		    EstimatedEnergyRequirement calculadora = HealthCalcImpl.getInstance();
+					float resultado = calculadora.estimatedEnergyRequirement(persona);
 					tfResultado_EER.setText(String.format("%.2f", resultado));
 					lblExito.setVisible(true);
 					
