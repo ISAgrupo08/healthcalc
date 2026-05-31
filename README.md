@@ -472,6 +472,7 @@ En esta práctica se ha rediseñado y extendido la aplicación de cálculo de sa
 4. Descripción del cambio: Se ha extraído la responsabilidad del cálculo del peso ideal de la calculadora central hacia un componente especializado. Para ello, se ha creado la interfaz `IdealBodyWeight` que define el contrato del cálculo.
 5. Número de cambios: hemos creado la interfaz IdealBodyWeight y hemos tenido que implementarla en HealthCalcImpl. Es decir, hemos tenido que refactorizar 5 o 6 clases para que pueda compilar con el refactoring IdealBodyWeight.
 
+---
 
 ### REFACTORING 6: Especialización del Requerimiento Energético Estimado (EstimatedEnergyRequirement)
 
