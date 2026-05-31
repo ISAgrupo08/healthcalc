@@ -20,7 +20,7 @@ public class AdapterHospital implements HealthHospital {
             double bmi = calc.basalMetabolicIndex(persona);
             BMICategory category = calc.category(persona);
 
-            return new Tuple<>((float) bmi, category.toString());
+            return new Tuple<>((float) bmi, category.getEtiqueta());
         } catch (Exception e) {
             throw new RuntimeException("Error calculating BMI", e);
         }
@@ -39,9 +39,9 @@ public class AdapterHospital implements HealthHospital {
                 throw new IllegalArgumentException("Sexo no válido. Use 'm' para masculino o 'f' para femenino.");
             }
             // Adaptación: Centímetros a Metros
-            double alturaMetros = altura * 100.0;
+            double alturaCm = altura * 100.0;
 
-            Person persona = new PersonImpl(70.0f, (float) alturaMetros, genderEnum, 25, null);
+            Person persona = new PersonImpl(70.0f, (float) alturaCm, genderEnum, 25, null);
             double pesocorporalIdeal = calc.idealBodyWeight(persona);
 
             return (int) pesocorporalIdeal;
