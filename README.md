@@ -401,7 +401,7 @@ Para saber cuántas calorías debo consumir según mis características
 ![IBW](java-project-healthcalc/doc/gui/CalculadoraIBW.PNG)
 ![REE](java-project-healthcalc/doc/gui/CalculadoraEER.png)
 
-## Práctica 6: Patrones de Diseño
+## Patrones de Diseño
 
 En esta práctica se ha rediseñado y extendido la aplicación de cálculo de salud integrando patrones de diseño estructurales y de creación.
 
