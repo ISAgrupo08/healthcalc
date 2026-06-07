@@ -401,7 +401,7 @@ Para saber cuántas calorías debo consumir según mis características
 ![IBW](java-project-healthcalc/doc/gui/CalculadoraIBW.PNG)
 ![REE](java-project-healthcalc/doc/gui/CalculadoraEER.png)
 
-## Práctica 6: Patrones de Diseño
+## Patrones de Diseño
 
 En esta práctica se ha rediseñado y extendido la aplicación de cálculo de salud integrando patrones de diseño estructurales y de creación.
 
@@ -435,7 +435,7 @@ En esta práctica se ha rediseñado y extendido la aplicación de cálculo de sa
 
 ![Diagrama UML Decorator](./design_patterns/DiagramaUML_Decorator.png)
 
-## Práctica 7: Refactorings
+## Refactorings
 
 ### REFACTORING 1: Reemplazar TIPO PRIMITIVO con ENUM (Gender)
 
