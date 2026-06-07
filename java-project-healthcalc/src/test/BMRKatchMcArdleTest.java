@@ -1,4 +1,6 @@
-package healthcalc;
+import healthcalc.HealthCalc;
+import healthcalc.HealthCalcImpl;
+import healthcalc.exceptions.InvalidHealthDataException;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,8 +29,12 @@ public class BMRKatchMcArdleTest {
     private HealthCalc healthCalc;
 
     @BeforeEach
-    void setUp() {
-        healthCalc = new HealthCalcImpl();
+    void setUp() throws Exception {
+        // HealthCalcImpl() constructor is not public; instantiate via reflection
+        Class<?> implClass = Class.forName("healthcalc.HealthCalcImpl");
+        java.lang.reflect.Constructor<?> ctor = implClass.getDeclaredConstructor();
+        ctor.setAccessible(true);
+        healthCalc = (HealthCalc) ctor.newInstance();
     }
 
     @Nested

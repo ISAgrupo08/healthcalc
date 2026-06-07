@@ -2,22 +2,26 @@ package stepdefinitions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import healthcalc.HealthCalc;
+import healthcalc.BMICategory;
+import healthcalc.BasalMetabolicIndex;
 import healthcalc.HealthCalcImpl;
+import healthcalc.Person;
+import healthcalc.PersonImpl;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
 
 public class BMIFullSteps {
-    private HealthCalc healthcalc;
+    private BasalMetabolicIndex calculadora;
     private double weight;
     private double height;
     private double bmi;
-    private String resultado;
+    private BMICategory bmiClasification;
     private boolean exceptionThrown;
     @Dado("la calculadora de salud está iniciada")
     public void la_calculadora_de_salud_está_iniciada() {
-        this.healthcalc = HealthCalcImpl.getInstance();
+        BasalMetabolicIndex calculadora = HealthCalcImpl.getInstance();
+        this.calculadora = calculadora;
     }
 
     @Dado("el peso introducido es {double}")
@@ -32,22 +36,25 @@ public class BMIFullSteps {
     @Cuando("ejecuto la operación de BMI")
     public void ejecuto_la_operación_de_BMI() {
         try {
-              this.bmi = healthcalc.bmi(weight, (height/100.0));
-            this.resultado = healthcalc.bmiClassification(this.bmi);
+            Person person = new PersonImpl(this.weight, this.height/100.0, null, 0, null);
+            this.bmi = calculadora.basalMetabolicIndex(person);
+            this.bmiClasification = calculadora.category(person);
             exceptionThrown = false;
         } catch (Exception e) {
             exceptionThrown = true;
         }
+        
     }
     @Entonces("el bmi debe ser {double}")
     public void el_bmi_debe_ser(double double1) {
          // El 0.01 es el margen de error. 
         // Dice: "Si la diferencia es menor a 0.01, acéptalo como válido".
-        assertEquals(double1, bmi, 0.01);
+        assertEquals(double1, this.bmi, 0.01);
     }
+    
     @Entonces("el resultado debe ser {string}")
     public void el_resultado_debe_ser(String String1) {
-         assertEquals(String1, this.resultado);
+         assertEquals(String1, this.bmiClasification.getEtiqueta());
     }
     @Entonces("el sistema debe lanzar una excepción")
     public void el_sistema_debe_lanzar_una_excepción() {

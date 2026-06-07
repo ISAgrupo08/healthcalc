@@ -6,7 +6,7 @@ public class ProxyHealthCalc implements HealthHospital, HealthStats {
 
     // Atributos para almacenar las estadísticas
 
-    private HealthCalc calc;
+    private HealthCalcImpl calc;
     private float Suma_Altura = 0;
     private int Contador_Altura = 0;
     private float Suma_Peso = 0;
@@ -19,7 +19,7 @@ public class ProxyHealthCalc implements HealthHospital, HealthStats {
 
     // Constructor
 
-    public ProxyHealthCalc(HealthCalc calc) {
+    public ProxyHealthCalc(HealthCalcImpl calc) {
         this.calc = calc;
         this.realHospital = new AdapterHospital(this.calc);
     }

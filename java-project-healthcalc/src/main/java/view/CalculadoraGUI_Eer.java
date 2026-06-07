@@ -13,10 +13,15 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 
+import healthcalc.EstimatedEnergyRequirement;
+import healthcalc.BasalMetabolicIndex;
+import healthcalc.Gender;
 import healthcalc.HealthCalc;
 import healthcalc.HealthCalcImpl;
+import healthcalc.Gender;
 import healthcalc.exceptions.InvalidHealthDataException;
-
+import healthcalc.Person;
+import healthcalc.PersonImpl;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -277,16 +282,19 @@ public class CalculadoraGUI_Eer extends JFrame {
 					int edad = Integer.parseInt(tfEdad_EER.getText());
 					
 					String sexo = comboSexo_EER.getSelectedItem().toString();
+					Gender genero = "Femenino".equals(sexo) ? Gender.FEMALE : Gender.MALE;
 					
 					String actividad = "";
-		            if (rdbtnSedentario.isSelected()) actividad = "Sedentario";
-		            else if (rdbtnLigero.isSelected()) actividad = "Ligero";
-		            else if (rdbtnModerado.isSelected()) actividad = "Moderado";
-		            else if (rdbtnActivo.isSelected()) actividad = "Activo";
-		            else if (rdbtnMuyActivo.isSelected()) actividad = "Muy Activo";
+					if (rdbtnSedentario.isSelected()) actividad = "Sedentario";
+					else if (rdbtnLigero.isSelected()) actividad = "Ligero";
+					else if (rdbtnModerado.isSelected()) actividad = "Moderado";
+					else if (rdbtnActivo.isSelected()) actividad = "Activo";
+					else if (rdbtnMuyActivo.isSelected()) actividad = "Muy Activo";
 					
-					HealthCalc calc = HealthCalcImpl.getInstance();
-					double resultado = calc.eer(sexo, edad, peso, altura, actividad);
+					Person persona = new PersonImpl(peso, altura, genero,edad,actividad);
+
+	    		    EstimatedEnergyRequirement calculadora = HealthCalcImpl.getInstance();
+					float resultado = calculadora.estimatedEnergyRequirement(persona);
 					tfResultado_EER.setText(String.format("%.2f", resultado));
 					lblExito.setVisible(true);
 					
