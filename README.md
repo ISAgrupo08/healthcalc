@@ -494,3 +494,7 @@ En esta práctica se ha rediseñado y extendido la aplicación de cálculo de sa
 3. Tipo / Categoría del refactoring: Class Refactoring / Method Refactoring. 
 4. Descripción del cambio: Se ha renombrado de forma semántica la interfaz genérica por EstimatedEnergyRequirement y su método por estimatedEnergyRequirement(Person person). Además, se ha extendido de forma proactiva la interfaz Person introduciendo el método activity() para encapsular el nivel de actividad, logrando de este modo que la función reciba únicamente la abstracción del paciente y limpie por completo los primitivos sueltos. 
 5. Número de cambios: Creación de la interfaz (EstimatedEnergyRequirement.java), adición de una firma de método en la interfaz Person junto con su correspondiente clase de datos, y adaptación/retipado del método matemático interno de double a float en HealthCalcImpl mediante un cast de retorno. Adicionalmente, hemos tenido que refactorizar una alrededor de 7 clases para que pueda compilar con el refactoring EstimatedEnergyRequirement.
+
+## Nuevo Proyecto HealthCalc
+
+![Nuevo proyecto HealthCalc](/doc/Nuevo%20Proyecto%20HealthCalc.png)
