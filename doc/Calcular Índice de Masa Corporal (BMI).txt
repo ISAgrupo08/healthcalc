@@ -1,0 +1,42 @@
+Caso de Uso: M1 Calcular Índice de Masa Corporal (IMC/BMI)
+ID: CU-01
+Actor principal: Usuario
+Ámbito: Calculadora de Salud
+Nivel: Objetivo de usuario
+Descripción: Evalúa la adecuación del peso de una persona en relación con su altura para estimar la grasa corporal.
+
+Stakeholders e intereses:
+-Usuario: Desea obtener una evaluación rápida y precisa de su estado nutricional para monitorizar su salud.
+-Desarrollador del Sistema: Asegurar que los cálculos matemáticos sean exactos y las validaciones impidan errores de ejecución.
+-Establecimientos(Farmacias,Gyms...): Aquellos establecimientos que contengan básculas inteligentes con este sistema incorporado. 
+
+Precondiciones:
+-El sistema debe estar en la pantalla de "Métricas Antropométricas".
+-El usuario debe conocer su peso actual (kg) y su altura (cm o m).
+
+Garantías de éxito:
+-El sistema muestra el valor numérico del IMC con precisión decimal.
+-El sistema asigna y muestra la categoría diagnóstica correcta según la tabla de la OMS.
+-Los datos se limpian o guardan según la preferencia del usuario para una nueva consulta.
+
+Garantías mínimas:
+-El sistema informa si los valores introducidos están fuera de los rangos biológicos permitidos (límites del sistema).
+-No se produce un error de división por cero si la altura es nula.
+
+Disparador: El usuario pulsa el botón "Calcular" tras introducir sus datos biométricos.
+
+Escenario de éxito (Flujo Básico):
+1. El usuario introduce su peso en kilogramos.
+2. El usuario introduce su altura.
+3. El sistema valida que ambos números sean positivos y coherentes (ej: altura < 300cm).
+4. El sistema realiza el cálculo: IMC = peso / altura^2.
+5. El sistema compara el resultado con los rangos oficiales de la OMS.
+6. El sistema muestra en pantalla el resultado numérico y la clasificación (ej: "22.5 - Normal").
+
+Extensiones (Flujos Alternativos):
+1a. Peso igual a cero o negativo: El sistema detecta un valor inválido, envía un mensaje de error y vuelve al paso 1.
+1b. Peso superior al límite superior asignado: EL sistema detecta que el valor es superior al límite establecido y envía un mensaje de error.
+3a. Altura igual a cero o negativo: El sistema muestra un mensaje de error y vuelve al punto 1 del escenario principal.
+3b. Altura introducida en centímetros (ej: 175 en lugar de 1.75): El sistema detecta que el valor es superior al límite establecido para metros(>3), lo convierte automáticamente a cm dividiendo por 100 y lo comunica al usuario.
+6a. Resultado de Obesidad Clase III (>= 40): El sistema muestra el resultado en rojo sugiriendo consultar con un profesional médico.
+
