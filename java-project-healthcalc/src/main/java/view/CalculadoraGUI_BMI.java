@@ -230,7 +230,7 @@ public class CalculadoraGUI_BMI extends JFrame {
 	                double alturaCm = Double.parseDouble(strAltura);
 	                double alturaMetros = alturaCm / 100.0;
 	                
-                    HealthCalc calc = new HealthCalcImpl();
+                    HealthCalc calc = HealthCalcImpl.getInstance();
                     double bmi = calc.bmi(peso, alturaMetros);
                     String clasificacion = calc.bmiClassification(bmi);
                     

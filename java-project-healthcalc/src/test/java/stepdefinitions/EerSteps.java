@@ -20,7 +20,7 @@ public class EerSteps {
 
     @Dado("que la calculadora de salud se encuentra operativa")
     public void operativa() {
-        this.healthcalc = new HealthCalcImpl();
+        this.healthcalc = HealthCalcImpl.getInstance();
     }
 
     @Dado("que introduzco el sexo {string}")

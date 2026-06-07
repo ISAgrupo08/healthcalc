@@ -164,7 +164,7 @@ public class CalculadoraGUI_IBW extends JFrame {
 					String seleccion = comboSexo_IBW.getSelectedItem().toString();
 					char genero = (seleccion.equalsIgnoreCase("Masculino")) ? 'm' : 'f';
 					
-					HealthCalc calc = new HealthCalcImpl();
+					HealthCalc calc = HealthCalcImpl.getInstance();
 					double resultado = calc.ibwLorentz(altura, genero);
 					// Mostrar resultado
 					textresultado_IBW.setText(String.format("%.2f", resultado));

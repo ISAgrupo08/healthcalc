@@ -15,7 +15,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         // 1. Creamos el objeto de nuestra calculadora
-        HealthCalc healthCalc = new HealthCalcImpl();
+        HealthCalc healthCalc = HealthCalcImpl.getInstance();
+        HealthHospital sistemaHospital =new AdapterHospital(healthCalc);
+        ProxyHealthCalc Proxy = new ProxyHealthCalc(sistemaHospital);
+        HealthHospital HospitalConProxy = Proxy;
+        HealthStats Stats = Proxy;
         // 2. Preparamos el Scanner para leer del teclado (System.in)
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("=== CALCULADORA DE SALUD Y PESO ===");
@@ -66,5 +70,33 @@ public class Main {
             //Cualquier otro error inesperado que pueda ocurrir durante la ejecución del programa.
             System.out.println("Ocurrió un error inesperado: " + e.getMessage());
         }
+
+        System.out.println("Patron Adapter");
+
+        try{
+            int peso = 80000;
+            float altura = 1.80f;
+            char sexo = 'm';
+
+            System.out.println("Enviando datos traducidos -> Altura: " + altura + "m, Peso: " + peso + "g, Sexo: " + sexo);
+
+            Tuple<Float, String> resultado = HospitalConProxy.indiceMasaCorporal(altura, peso);
+            System.out.println("Resultado del índice de masa corporal: " + resultado.getFirst() + " - " + resultado.getSecond());
+
+            int ibwHospital = HospitalConProxy.pesoCorporalIdeal(sexo, altura);
+            System.out.println("Peso corporal ideal según el hospital: " + ibwHospital + " kg");
+
+        } catch (Exception e) {
+            System.out.println("Error en el sistema del hospital: " + e.getMessage());
+        }
+
+        System.out.println("\nESTADÍSTICAS DEL PROXY");
+        System.out.println("Total pacientes: " + Stats.numTotalPacientes());
+        System.out.println("Hombres: " + Stats.numSexoH());
+        System.out.println("Mujeres: " + Stats.numSexoM());
+        System.out.println("Peso medio: " + String.format("%.2f", Stats.pesoMedio()) + " kg");
+        System.out.println("Altura media: " + String.format("%.2f", Stats.alturaMedia()) + " m");
+        System.out.println("IMC medio: " + String.format("%.2f", Stats.imcMedio()));
+
     }
 }

@@ -285,7 +285,7 @@ public class CalculadoraGUI_Eer extends JFrame {
 		            else if (rdbtnActivo.isSelected()) actividad = "Activo";
 		            else if (rdbtnMuyActivo.isSelected()) actividad = "Muy Activo";
 					
-					HealthCalc calc = new HealthCalcImpl();
+					HealthCalc calc = HealthCalcImpl.getInstance();
 					double resultado = calc.eer(sexo, edad, peso, altura, actividad);
 					tfResultado_EER.setText(String.format("%.2f", resultado));
 					lblExito.setVisible(true);
