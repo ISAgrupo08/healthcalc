@@ -9,7 +9,21 @@ import healthcalc.exceptions.InvalidHealthDataException;
  *
  */	
 public interface HealthCalc {
+	
 
+	/**
+	 * Calculate the BMI classification of a person.
+	 * The BMI classification is based on the following table:
+	 * Underweight: BMI < 18.5
+	 * Normal weight: 18.5 <= BMI < 25
+	 * Overweight: 25 <= BMI < 30
+	 * Obesity: BMI >= 30
+	 *
+	 * @param bmi	Body Mass Index of the person (kg/m2).
+	 * @return	  	The BMI classification of the person.
+	 * @throws Exception
+	 */
+	public String bmiSimpleClassification(double bmi) throws InvalidHealthDataException;
 	/**
 	 * Calculate the BMI classification of a person.
 	 * The BMI classification is based on the following table:
@@ -60,5 +74,17 @@ public interface HealthCalc {
 	 */
 
     public double ibwLorentz(double height,char gender) throws InvalidHealthDataException;
+
+	/**
+	 * Calculate the Energy Requirement (ER) of a person with the Harris-Benedict formula:
+	 * @param sexo
+	 * @param edad
+	 * @param peso
+	 * @param altura
+	 * @param actividad
+	 * @return
+	 * @throws InvalidHealthDataException
+	 */
+	public double eer(String sexo, int edad, double peso, double altura, String actividad) throws InvalidHealthDataException;
 
 }

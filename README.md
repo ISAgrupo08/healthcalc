@@ -325,3 +325,172 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Ejecutar los tests con informe de cobertura (previamente configurado en pom.xml): `mvn test`
 
 </details>
+
+## Especificación
+### Casos de uso
+
+![Diagrama de casos de uso](doc/Diseño%20Calculadora%20de%20la%20Salud.png) 
+
+[Fichero fuente del diagrama](https://app.diagrams.net/#G1yKmG8z8P2H9c_LWbmt2ErhvACmDzaMQL#%7B%22pageId%22%3A%22pu5A0FDp6jbR8zr-CFi0%22%7D)
+
+[Caso de uso BMI (CU-01)](doc/BMI.txt)
+
+[Caso de Uso PCI/IBW (CU-02)](doc/Calcular%20Peso%20Corporal%20Ideal%20(IBW).txt)
+
+[Caso de uso TMB (CU-03)](doc/Calcular%20tasa%20metabólica%20basal.txt)
+
+## Behaviour Driven Development
+### Característica: Cálculo del Índice de Masa Corporal de un usuario
+Como usuario de la calculadora
+
+Quiero calcular el Índice de Masa Corporal de un usuario
+
+Para evaluar la adecuación del peso de una persona en relación con su altura
+
+    Escenario: Cálculo del BMI con datos válidos
+    
+    Escenario: Intento de cálculo de BMI con números negativos
+    
+    Escenario: Intento de cálculo de BMI con número fuera del rango establecido para el peso
+    
+    Escenario: Intento de cálculo de BMI con número fuera del rango establecido para la altura
+    
+    Esquema del Escenario: Verificación de cálculos exitosos múltiples
+
+[bmi_full.feature](https://github.com/ISAgrupo08/healthcalc/blob/P3/java-project-healthcalc/src/test/resources/bmi_full.feature)
+
+### Característica: Cálculo del Peso Corporal Ideal 
+Como usuario de la calculadora de salud
+  
+Quiero conocer mi peso ideal según mi altura y sexo
+  
+Para tener una referencia de mi estado de salud
+
+    Escenario: Cálculo correcto del IBW con datos válidos
+
+    Escenario: Intento de cálculo con datos incompletos
+
+    Escenario: Datos introducidos fuera de rango
+
+    Esquema del escenario: Cálculo del IBW según características del usuario
+
+[ibw.feature](https://github.com/ISAgrupo08/healthcalc/blob/P3/java-project-healthcalc/src/test/resources/ibw.feature)
+
+### Característica: Cálculo del Requerimiento Energético Estimado
+Como usuario de la calculadora de salud
+
+Quiero conocer mi requerimiento energético estimado diario
+
+Para saber cuántas calorías debo consumir según mis características
+
+    Escenario: Cálculo correcto del EER con datos válidos
+
+    Escenario: Intento de cálculo con datos incompletos
+
+    Escenario: Datos introducidos fuera de rango
+
+    Esquema del escenario: Cálculo del EER según características del usuario
+
+[eer.feature](https://github.com/ISAgrupo08/healthcalc/blob/P3/java-project-healthcalc/src/test/resources/eer.feature)
+
+## Interfaz Gráfica de Usuario
+
+![Prototipo](java-project-healthcalc/doc/gui/PrototipoGUI.PNG)
+![Menu](java-project-healthcalc/doc/gui/CalculadoraMenu.PNG)
+![BMI](java-project-healthcalc/doc/gui/CalculadoraBMI.PNG)
+![IBW](java-project-healthcalc/doc/gui/CalculadoraIBW.PNG)
+![REE](java-project-healthcalc/doc/gui/CalculadoraEER.png)
+
+## Patrones de Diseño
+
+En esta práctica se ha rediseñado y extendido la aplicación de cálculo de salud integrando patrones de diseño estructurales y de creación.
+
+### 1. Patrón Singleton (Instancia Única)
+
+* **Propósito:** garantizar que la clase `HealthCalcImpl` tenga una única instancia en toda la aplicación y proporcionar un punto de acceso global a ella.
+* **Implementación:** se ha privatizado el constructor de `HealthCalcImpl` para evitar la creación de objetos mediante el operador `new` desde el exterior. Para ello se ha añadido un atributo estático privado `instance` del mismo tipo de la clase.
+
+![Diagrama UML Singleton](./design_patterns/DiagramaUML_Singleton.png)
+
+### 2. Patrón Adapter
+
+* **Propósito:** permitir que una interfaz de un sistema externo (el Sistema Hospitalario `HealthHospital`) pueda utilizar la lógica de nuestra calculadora existente (`HealthCalc`), a pesar de que utilicen métodos y unidades de medidas distintas (metros y gramos frente a centímetros y kilogramos).
+* **Implementación:** el sistema externo del hospital (`HealthHospital`) usa nuestra lógica existente (`HealthCalc`) a través de la clase puente `AdapterHospital`, que implementa la interfaz objetivo `HealthHospital`. El adaptador realiza la traducción de datos "al vuelo" (conversión de gramos a kilogramos, redondeo de tipos de datos de `double` a `int`...)
+
+![Diagrama UML Adapter](./design_patterns/DiagramaUML_Adapter.png)
+
+### 3. Patrón Proxy
+
+* **Propósito:** interceptar las llamadas dirigidas al sistema hospitalario (`HealthHospital`) para registrar de forma automatizada y anónima los datos introducidos y calculados de cada paciente, permitiendo obtener estadísticas e históricos globales (como medias de peso, altura e IMC) sin modificar la lógica de negocio original ni el comportamiento del cliente.
+
+* **Implementación:** la clase `ProxyHealthCalc` actúa como un intermediario inteligente implementando la interfaz `HealthHospital` y heredando también de `HealthStats`. El Proxy envuelve al adaptador real (`AdapterHospital`) y, cada vez que se solicita una métrica médica (como el IMC o el peso ideal), intercepta los parámetros de entrada y los resultados para acumularlos en variables estadísticas internas de forma transparente, delegando inmediatamente después la ejecución real en el objeto hospitalario empaquetado.
+
+![Diagrama UML Proxy](./design_patterns/DiagramaUML_Proxy.png)
+
+### 4. Patrón Decorator
+
+* **Propósito:** permitir añadir responsabilidades adicionales de forma dinámica y combinable a la calculadora original (HealthCalc), como la conversión automática a sistemas de unidades extranjeros (versión europea con altura en metros y peso en gramos, y americana con altura en pies y peso en libras) y la generación automatizada de mensajes con los resultados del "IMC" en diferentes idiomas (español e inglés), todo ello sin alterar la lógica de negocio existente y reutilizando la estructura implementada.
+
+* **Implementación:** se han definido unas clases abstractas base "BaseDecoratorRegion" que implementa la interfaz HealthCalc y mantiene una referencia interna (un campo protegido de agregación) hacia un objeto del mismo tipo de la interfaz. A partir de ella se extienden dos familias de decoradores concretos: los decoradores de conversión de unidades (EU y USA), que interceptan los parámetros de entrada no estándar para transformarlos al Sistema Internacional antes de delegar la operación; y la otra clase abstracta "BaseDecoratorLanguage" (Español e English), que ejecutan el cálculo base y añaden la impresión formateada del mensaje por pantalla. Este diseño permite "apilar" capas de envolturas (wrappers) de forma flexible (por ejemplo, una calculadora americana que imprima en inglés) de manera transparente para el cliente.
+
+![Diagrama UML Decorator](./design_patterns/DiagramaUML_Decorator.png)
+
+## Refactorings
+
+### REFACTORING 1: Reemplazar TIPO PRIMITIVO con ENUM (Gender)
+
+1. **Bad Smell / Problema:** obsesión por los primitivos (Primitive Obsession). 
+2. **Refactoring aplicado:** reemplazar tipo primitivo con clase <<enum>>.
+3. **Tipo / Categoría del refactoring:** Attribute Refactoring.
+4. **Descripción del cambio:** se ha eliminado el uso del tipo primitivo char y se ha creado el tipo enumerado estricto Gender con los valores FEMALE y MALE. Así el sistema impide la introducción de datos inválidos en tiempo de compilación, garantizando que solo se utilicen los géneros permitidos. 
+5. **Número de cambios:** 1 archivo creado, con 3 líneas de código.
+
+---
+
+### REFACTORING 2: Introducir un PARÁMETRO OBJETO (Person)
+
+1. **Bad Smell / Problema:** grupos cohesionados de datos (Data Clumps). 
+2. **Refactoring aplicado:** introducir un parámetro objeto / preservar el objeto completo
+3. **Tipo / Categoría del refactoring:** Method Refactoring
+4. **Descripción del cambio:** se ha creado la interfaz abstracta Person para unificar y encapsular todas los parámetros de un individuo (weight, height, gender, age). Con esto, evitamos que las funciones de la calculadora reciban de forma repetida estos parámetros primitivos sueltos que siempre viajaban juntos, agrupándolos en un único objeto contenedor. 
+5. **Número de cambios:** 1 archivo creado, con 4 o 5 líneas de código.
+
+--- 
+
+### REFACTORING 3: Categorización de estados de salud (BMICategory) 
+
+1. **Bad Smell / Problema:** Primitive Obsession (Obsesión por los tipos primitivos). Se utilizaban Strings o números mágicos para representar las categorías de IMC, lo que es propenso a errores tipográficos y dificulta la validación de valores. 
+2. **Refactoring aplicado:** Replace Magic Number with Enum (Reemplazar número mágico por enumerado). 
+3. **Tipo / Categoría del refactoring:** Class Refactoring. 
+4. **Descripción del cambio:** Se ha sustituido la gestión manual de las categorías de IMC por el tipo enum BMICategory. Esto garantiza la seguridad de tipos, centraliza todas las posibles categorías en un único punto y mejora la legibilidad del código en las sentencias switch o if. 
+5. **Número de cambios:** Creación de 1 enumerado (BMICategory.java), actualización de 2 clases de lógica para devolver tipos BMICategory en lugar de String, y modificación de la capa de vista para traducir el enum a texto legible.
+
+---
+
+### REFACTORING 4: Definición del contrato de cálculo metabólico (BasalMetabolicIndex) 
+
+1. **Bad Smell / Problema:** Shotgun Surgery (Cirugía de escopeta). Cualquier cambio en la lógica de cálculo metabólico obligaba a modificar múltiples clases de la capa de presentación y de lógica, al no existir un contrato único que definiera qué hace una calculadora de BMR. 
+2. **Refactoring aplicado:** Extract Interface (Extracción de interfaz). 
+3. **Tipo / Categoría del refactoring:** Class Refactoring. 
+4. **Descripción del cambio:** Se ha creado la interfaz BasalMetabolicIndex para estandarizar las operaciones de cálculo metabólico.
+5. **Número de cambios:** Creación de 1 interfaz (BasalMetabolicIndex.java) y refactorización de 1 clase existente (HealthCalcImpl) para implementar la interfaz.
+
+---
+
+### REFACTORING 5: Definición del contrato de cálculo del peso ideal (IdealBodyWeight)
+
+1. Bad Smell / Problema: Parámetros largos (Long Parameter List) y Obsesión por los primitivos (Primitive Obsession). La lógica de cálculo del peso ideal dependía de datos primitivos sueltos en lugar de estar guiada por un contrato de diseño claro y desacoplado. 
+2. Refactoring aplicado: Extract Interface (Extracción de interfaz) y Preserve Whole Object (Preservar el objeto completo). 
+3. Tipo / Categoría del refactoring: Class Refactoring / Method Refactoring. 
+4. Descripción del cambio: Se ha extraído la responsabilidad del cálculo del peso ideal de la calculadora central hacia un componente especializado. Para ello, se ha creado la interfaz `IdealBodyWeight` que define el contrato del cálculo.
+5. Número de cambios: hemos creado la interfaz IdealBodyWeight y hemos tenido que implementarla en HealthCalcImpl. Es decir, hemos tenido que refactorizar 5 o 6 clases para que pueda compilar con el refactoring IdealBodyWeight.
+
+---
+
+### REFACTORING 6: Especialización del Requerimiento Energético Estimado (EstimatedEnergyRequirement)
+
+1. Bad Smell / Problema: Nombre misterioso (Mysterious Name) debido a los identificadores genéricos del esquema base ("OtraMétrica" y "m()") , sumado a una Envidia de características (Feature Envy) al necesitar acceder a prácticamente todos los atributos biométricos del paciente. 
+2. Refactoring aplicado: Rename Interface / Method (Renombrar interfaz y método) y Extract Interface (Extracción de interfaz). 
+3. Tipo / Categoría del refactoring: Class Refactoring / Method Refactoring. 
+4. Descripción del cambio: Se ha renombrado de forma semántica la interfaz genérica por EstimatedEnergyRequirement y su método por estimatedEnergyRequirement(Person person). Además, se ha extendido de forma proactiva la interfaz Person introduciendo el método activity() para encapsular el nivel de actividad, logrando de este modo que la función reciba únicamente la abstracción del paciente y limpie por completo los primitivos sueltos. 
+5. Número de cambios: Creación de la interfaz (EstimatedEnergyRequirement.java), adición de una firma de método en la interfaz Person junto con su correspondiente clase de datos, y adaptación/retipado del método matemático interno de double a float en HealthCalcImpl mediante un cast de retorno. Adicionalmente, hemos tenido que refactorizar una alrededor de 7 clases para que pueda compilar con el refactoring EstimatedEnergyRequirement.

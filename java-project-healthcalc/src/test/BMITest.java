@@ -1,0 +1,287 @@
+package healthcalc;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import healthcalc.exceptions.InvalidHealthDataException;
+
+/**
+ * Tests for the HealthCalc interface.
+ * 
+ * Use the AAA pattern (Arrange, Act, Assert) for the tests.
+ * 
+ * @author ISA
+ */
+@DisplayName("Tests para la calculadora de salud.")
+public class BMITest {
+
+	private BasalMetabolicIndex healthCalc;
+
+	@BeforeEach
+	void setUp() {
+		healthCalc = HealthCalcImpl.getInstance();
+	}
+
+    @Nested
+    @DisplayName("Métrica del BMI")
+    class BMIMetricTests {
+
+        @Test
+        @DisplayName("Cálculo de BMI con valores estándar válidos")
+        void testBmiValido() throws InvalidHealthDataException {
+            double weight = 70.0;
+            double height = 1.75;
+            double expectedBmi = 70.0 / Math.pow(1.75, 2);
+
+            Person person = new PersonImpl(weight, height, null, 0, null);
+            double result = healthCalc.basalMetabolicIndex(person);
+
+            assertEquals(expectedBmi, result, 0.01);
+        }
+
+        @Test
+        @DisplayName("Lanzar excepción cuando el peso es cero")
+        void testBmiPesoCero() {
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.basalMetabolicIndex(new PersonImpl(0, 170, null, 0, null)));
+        }
+
+        @Test
+        @DisplayName("Lanzar excepción cuando la altura es cero")
+        void testBmiAlturaCero() {
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.basalMetabolicIndex(new PersonImpl(70, 0, null, 0, null)));
+        }
+
+        @Test
+        @DisplayName("Lanzar excepción cuando los valores son negativos")
+        void testBmiNegativos() {
+            assertAll(
+                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.basalMetabolicIndex(new PersonImpl(-70, 170, null, 0, null))),
+                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.basalMetabolicIndex(new PersonImpl(70, -170, null, 0, null)))
+            );
+        }
+
+        @ParameterizedTest(name = "Peso mínimo inválido: {0} kg")
+        @ValueSource(doubles = {-10.0, 0.0, 0.99})
+        @DisplayName("Bloqueo de pesos inferiores al límite biológico mínimo (1 kg)")
+        void testPesoMinimoImposible(double weight) {
+            double height = 170.0;
+            
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.basalMetabolicIndex(new PersonImpl(weight, height, null, 0, null)));
+        }
+
+        @ParameterizedTest(name = "Peso máximo inválido: {0} kg")
+        @ValueSource(doubles = {700.1, 1000.0, 5000.0})
+        @DisplayName("Bloqueo de pesos superiores al límite biológico máximo (700 kg)")
+        void testPesoMaximoImposible(double weight) {
+            double height = 170.0;
+            
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.basalMetabolicIndex(new PersonImpl(weight, height, null, 0, null)));
+        }
+
+        @ParameterizedTest(name = "Altura mínima inválida: {0} m")
+        @ValueSource(doubles = {-0.50, 0.0, 0.29})
+        @DisplayName("Bloqueo de alturas inferiores al límite biológico mínimo (30 m)")
+        void testAlturaMinimaImposible(double height) {
+            double weight = 70.0;
+            
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.basalMetabolicIndex(new PersonImpl(weight, height, null, 0, null)));
+        }
+
+        @ParameterizedTest(name = "Altura máxima inválida: {0} m")
+        @ValueSource(doubles = {3.01, 3.50, 5.00})
+        @DisplayName("Bloqueo de alturas superiores al límite biológico máximo (300 m)")
+        void testAlturaMaximoImposible(double height) {
+            double weight = 70.0;
+            
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.basalMetabolicIndex(new PersonImpl(weight, height, null, 0, null)));
+        }
+    }
+
+	@Nested
+    @DisplayName("Clasificación básica a partir del BMI")
+    class BMIClassificationTests {
+
+        
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Severe Thinness")
+        @ValueSource(doubles = {10.0, 15.99})
+        @DisplayName("Validación de categoría Severe Thinness (Delgadez severa)")
+        void testBmiSevereThinness(double bmi) throws InvalidHealthDataException {
+            String expected = BMICategory.SEVERE_THINNESS.getEtiqueta();
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+
+            BMICategory result = healthCalc.category(new PersonImpl(peso, altura, Gender.MALE, 40, null));
+
+            assertEquals(expected, result.getEtiqueta());
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Moderate Thinness")
+        @ValueSource(doubles = {16.0, 16.5, 16.99})
+        @DisplayName("Validación de categoría Moderate Thinness (Delgadez moderada)")
+        void testBmiModerateThinness(double bmi) throws InvalidHealthDataException {
+            String expected = BMICategory.MODERATE_THINNESS.getEtiqueta();
+
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+
+            BMICategory result = healthCalc.category(new PersonImpl(peso, altura, Gender.MALE, 40, null));
+
+            assertEquals(expected, result.getEtiqueta());
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Mild Thinness")
+        @ValueSource(doubles = {17.0, 17.8, 18.49})
+        @DisplayName("Validación de categoría Mild Thinness (Delgadez leve)")
+        void testBmiMildThinness(double bmi) throws InvalidHealthDataException {
+            BMICategory expected = BMICategory.MILD_THINNESS;
+
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+
+            BMICategory result = healthCalc.category(new PersonImpl(peso, altura, Gender.MALE, 40, null));
+
+            assertEquals(expected, result);
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Normal")
+        @ValueSource(doubles = {18.5, 22.0, 24.99})
+        @DisplayName("Validación de categoría Normal")
+        void testBmiNormal(double bmi) throws InvalidHealthDataException {
+            BMICategory expected = BMICategory.NORMAL;
+
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+
+            BMICategory result = healthCalc.category(new PersonImpl(peso, altura, Gender.MALE, 40, null));
+
+            assertEquals(expected, result);
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Overweight")
+        @ValueSource(doubles = {25.0, 27.5, 29.99})
+        @DisplayName("Validación de categoría Overweight (Sobrepeso)")
+        void testBmiOverweight(double bmi) throws InvalidHealthDataException {
+            BMICategory expected = BMICategory.OVERWEIGHT;
+
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+
+            BMICategory result = healthCalc.category(new PersonImpl(peso, altura, Gender.MALE, 40, null));
+
+            assertEquals(expected, result);
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Obese Class I")
+        @ValueSource(doubles = {30.0, 32.5, 34.99})
+        @DisplayName("Validación de categoría Obese Class I")
+        void testBmiObeseClassI(double bmi) throws InvalidHealthDataException {
+            BMICategory expected = BMICategory.OBESE_CLASS_I;
+
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+
+            BMICategory result = healthCalc.category(new PersonImpl(peso, altura, Gender.MALE, 40, null));
+
+            assertEquals(expected, result);
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Obesse Class II")
+        @ValueSource(doubles = {35.0, 37.5, 39.99})
+        @DisplayName("Validación de categoría Obese Class II")
+        void testBmiObeseClassII(double bmi) throws InvalidHealthDataException {
+            BMICategory expected = BMICategory.OBESE_CLASS_II;
+
+            double altura = 1.75;
+            // Multiplicamos por la altura al cuadrado para obtener el peso correspondiente a ese BMI
+            double peso = bmi * Math.pow(altura, 2);
+
+            // Ejecutamos la clasificación pasándole el objeto Person
+            BMICategory result = healthCalc.category(new PersonImpl((float) peso, (float) altura, Gender.MALE, 40, null));
+
+            // Validamos que la etiqueta devuelta por el Enum coincida exactamente con lo esperado
+            assertEquals(expected, result);
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como Obesse Class III")
+        @ValueSource(doubles = {40.0, 45.0, 150.0})
+        @DisplayName("Validación de categoría Obese Class III")
+        void testBmiObeseClassIII(double bmi) throws InvalidHealthDataException {
+            BMICategory expected = BMICategory.OBESE_CLASS_III;
+
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+
+            BMICategory result = healthCalc.category(new PersonImpl(peso, altura, null, 0, null));
+
+            assertEquals(expected, result);
+        }
+
+        @ParameterizedTest(name = "BMI mínimo inválido: {0}")
+        @ValueSource(doubles = {-50.0, -1.0, -0.01})
+        @DisplayName("Bloqueo de valores de BMI negativos (Error de entrada)")
+        void testBmiClassificationMinimoImposible(double bmi) {
+            double altura = 1.00;
+            double peso = bmi * Math.pow(altura, 2);
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.category(new PersonImpl(peso, altura, null, 0, null)));
+        }
+
+        @ParameterizedTest(name = "BMI máximo extremo: {0}")
+        @ValueSource(doubles = {150.1, 200.0, 500.0})
+        @DisplayName("Bloqueo de valores de BMI superiores al límite humano razonable (150)")
+        void testBmiClassificationMaximoImposible(double bmi) {
+            double altura = 1.00;
+            double peso = bmi * Math.pow(altura, 2);
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.category(new PersonImpl(peso, altura, null, 0, null)));
+        }
+
+        /* Test adicionales para mostrar que se pueden definir de otra forma. */
+
+        @Test
+        @DisplayName("Clasificación correcta para sobrepeso (Overweight)")
+        void testBmiOverweight() throws InvalidHealthDataException {
+            double bmiLimiteInferior = 25.0;
+            double bmiMedio = 27.5;
+            double bmiLimiteSuperior = 29.99;
+
+            String resultInferior = healthCalc.category(new PersonImpl(bmiLimiteInferior, 1.75, null, 0, null)).getEtiqueta();
+            String resultMedio = healthCalc.category(new PersonImpl(bmiMedio, 1.75, null, 0, null)).getEtiqueta();
+            String resultSuperior = healthCalc.category(new PersonImpl(bmiLimiteSuperior, 1.75, null, 0, null)).getEtiqueta();
+
+            assertAll(
+                () -> assertEquals(BMICategory.OVERWEIGHT.getEtiqueta(), resultInferior),
+                () -> assertEquals(BMICategory.OVERWEIGHT.getEtiqueta(), resultMedio),
+                () -> assertEquals(BMICategory.OVERWEIGHT.getEtiqueta(), resultSuperior)
+            );
+        }
+
+        @ParameterizedTest(name = "BMI {0} debe ser clasificado como {1}")
+        @CsvSource({
+            "10.0, Severe Thinness",
+            "16.1, Moderate Thinness",
+            "18.4, Mild Thinness",
+            "18.5, Normal",
+            "24.9, Normal",
+            "25.0, Overweight",
+            "29.9, Overweight",
+            "30.0, Obese Class I",
+            "45.0, Obese Class III",
+        })
+        @DisplayName("Clasificación de BMI en los límites exactos de cada categoría")
+        void testBmiClassificationLimites(double bmi, String expectedCategory) throws InvalidHealthDataException {
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+            BMICategory result = healthCalc.category(new PersonImpl(peso, altura, null, 0, null));
+
+            assertEquals(expectedCategory, result.getEtiqueta());
+        }
+    }
+
+}
