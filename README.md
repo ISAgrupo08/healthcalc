@@ -333,8 +333,62 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 [Fichero fuente del diagrama](https://app.diagrams.net/#G1yKmG8z8P2H9c_LWbmt2ErhvACmDzaMQL#%7B%22pageId%22%3A%22pu5A0FDp6jbR8zr-CFi0%22%7D)
 
-[Caso de uso BMI (CU-01)](doc/Calcular%20Índice%20de%20Masa%20Corporal%20(BMI).txt)
+[Caso de uso BMI (CU-01)](doc/BMI.txt)
 
 [Caso de Uso PCI/IBW (CU-02)](doc/Calcular%20Peso%20Corporal%20Ideal%20(IBW).txt)
 
 [Caso de uso TMB (CU-03)](doc/Calcular%20tasa%20metabólica%20basal.txt)
+
+## Behaviour Driven Development
+### Característica: Cálculo del Índice de Masa Corporal de un usuario
+Como usuario de la calculadora
+
+Quiero calcular el Índice de Masa Corporal de un usuario
+
+Para evaluar la adecuación del peso de una persona en relación con su altura
+
+    Escenario: Cálculo del BMI con datos válidos
+    
+    Escenario: Intento de cálculo de BMI con números negativos
+    
+    Escenario: Intento de cálculo de BMI con número fuera del rango establecido para el peso
+    
+    Escenario: Intento de cálculo de BMI con número fuera del rango establecido para la altura
+    
+    Esquema del Escenario: Verificación de cálculos exitosos múltiples
+
+[bmi_full.feature](https://github.com/ISAgrupo08/healthcalc/blob/2e38d99d235410affb35569a4598c1ac63ff5c43/java-project-healthcalc/src/test/resources/bmi_full.feature)
+
+### Característica: Cálculo del Peso Corporal Ideal 
+Como usuario de la calculadora de salud
+  
+Quiero conocer mi peso ideal según mi altura y sexo
+  
+Para tener una referencia de mi estado de salud
+
+    Escenario: Cálculo correcto del IBW con datos válidos
+
+    Escenario: Intento de cálculo con datos incompletos
+
+    Escenario: Datos introducidos fuera de rango
+
+    Esquema del escenario: Cálculo del IBW según características del usuario
+
+[ibw.feature](https://github.com/ISAgrupo08/healthcalc/blob/P3/java-project-healthcalc/src/test/resources/ibw.feature)
+
+### Característica: Cálculo del Requerimiento Energético Estimado
+Como usuario de la calculadora de salud
+
+Quiero conocer mi requerimiento energético estimado diario
+
+Para saber cuántas calorías debo consumir según mis características
+
+    Escenario: Cálculo correcto del EER con datos válidos
+
+    Escenario: Intento de cálculo con datos incompletos
+
+    Escenario: Datos introducidos fuera de rango
+
+    Esquema del escenario: Cálculo del EER según características del usuario
+
+[eer.feature](https://github.com/ISAgrupo08/healthcalc/blob/P3/java-project-healthcalc/src/test/resources/eer.feature)
