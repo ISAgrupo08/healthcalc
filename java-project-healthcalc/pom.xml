@@ -91,6 +91,20 @@
               </properties>
           </configuration>
       </plugin>
+      
+      <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.4.1</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <mainClass>view.CalculadoraGUI_Inicio</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+      </plugin>
 
       <plugin>
         <groupId>org.jacoco</groupId>
